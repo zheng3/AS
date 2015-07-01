@@ -1,0 +1,88 @@
+
+<!-- saved from url=(0063)http://isr.uci.edu/projects/xarchuci/ext/javaimplementation.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/javaimplementation.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:archinst="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" xmlns:archvariants="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/javaimplementation.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/variants.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Java Implementation XML Schema 1.0
+      
+      Depends on: {types.xsd, variants.xsd, implementation.xsd}
+         Note: The actual dependency set of this extension is
+         just types and implementation, but because of XML Schema 
+         1.0's single inheritance model, we also extend variants
+         so that a component/connector type may have both 
+         variants and an implementation.
+         
+      Change Log:
+         2002-07-23: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed location of core (xArch) schema in the import
+           statement to a more stable URL.
+         2002-01-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Upgraded to 2001 XML Schema standard and validated
+           with XML Spy 4.2.  Only changes were to the namespace
+           declaration for 'xsd' in the header.
+           Also changed JavaClassFile to a Complex-Simple type.
+         2001-04-12: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Cleaned up and validated with XML Spy 3.5.
+         2001-01-17: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development and validated with XSV
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: JavaImplementation
+
+    The JavaImplementation type contains the locations of the
+    class files that are part of the implementation of a 
+    Java component, connector, or interface in an architecture.
+    Each java implementation must have one main class, but
+    may also reference auxillary classes to help the
+    ClassLoader out.
+   -->
+  <xsd:complextype name="JavaImplementation">
+    <xsd:complexcontent>
+      <xsd:extension base="archimpl:Implementation">
+        <xsd:sequence>
+          <xsd:element name="mainClass" type="JavaClassFile">
+          <xsd:element name="auxClass" type="JavaClassFile" minoccurs="0" maxoccurs="unbounded">
+        </xsd:element></xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: JavaClassFile
+    
+    The JavaClassFile type contains the data necessary to locate
+    and instantiate a Java class file.  Files assumed to be on
+    the local classpath do not need a URL.  Files that are
+    to be retrieved from a remote server should have a URL.
+   -->
+  <xsd:complextype name="JavaClassFile">
+    <xsd:sequence>
+      <xsd:element name="javaClassName" type="JavaClassName">
+      <xsd:element name="url" type="archinst:XMLLink" minoccurs="0" maxoccurs="1">
+    </xsd:element></xsd:element></xsd:sequence>
+  </xsd:complextype>
+  
+  <!--
+    TYPE: JavaClassName
+
+    A JavaClassName is the name of a Java class,
+    i.e. edu.uci.isr.xarch.XArchUtils.
+   -->
+  <xsd:complextype name="JavaClassName">
+    <xsd:simplecontent>
+      <xsd:extension base="xsd:string">
+    </xsd:extension></xsd:simplecontent>
+  </xsd:complextype>
+  
+</xsd:import></xsd:import></xsd:import></xsd:import></xsd:schema>
+</body></html>

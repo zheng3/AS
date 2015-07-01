@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ISR SWT Utilities Plug-in
+Bundle-SymbolicName: edu.uci.isr.swtutils
+Bundle-Version: 4.1.50.qualifier
+Bundle-Vendor: Institute for Software Research, UC Irvine
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Export-Package: biz.volantec.utils.widgets,
+ edu.uci.isr.widgets.swt,
+ edu.uci.isr.widgets.swt.constants

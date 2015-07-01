@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<instance:xArch xmlns:instance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:changes="http://www.ics.uci.edu/pub/arch/xArch/changes.xsd" xmlns:hints3="http://www.ics.uci.edu/pub/arch/xArch/hints3.xsd" xmlns:implementation="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" xmlns:javaimplementation="http://www.ics.uci.edu/pub/arch/xArch/javaimplementation.xsd" xmlns:lookupimplementation="http://www.ics.uci.edu/pub/arch/xArch/lookupimplementation.xsd" xmlns:types="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ics.uci.edu/pub/arch/xArch/changes.xsd http://www.ics.uci.edu/~zhengy/schema/changes.xsd http://www.ics.uci.edu/pub/arch/xArch/interactions.xsd http://www.ics.uci.edu/~zhengy/schema/interactions.xsd http://www.ics.uci.edu/pub/arch/xArch/hints3.xsd http://www.isr.uci.edu/projects/xarchuci/ext/hints3.xsd http://www.ics.uci.edu/pub/arch/xArch/statecharts.xsd http://www.ics.uci.edu/~zhengy/schema/statecharts.xsd http://www.ics.uci.edu/pub/arch/xArch/changesets.xsd http://www.isr.uci.edu/projects/xarchuci/ext/changesets.xsd http://www.ics.uci.edu/pub/arch/xArch/lookupimplementation.xsd http://www.isr.uci.edu/projects/xarchuci/ext/lookupimplementation.xsd http://www.ics.uci.edu/pub/arch/xArch/javaimplementation.xsd http://www.isr.uci.edu/projects/xarchuci/ext/javaimplementation.xsd http://www.ics.uci.edu/pub/arch/xArch/variants.xsd http://www.isr.uci.edu/projects/xarchuci/ext/variants.xsd http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd http://www.ics.uci.edu/pub/arch/xArch/types.xsd http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd http://www.ics.uci.edu/pub/arch/xArch/instance.xsd http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+    <types:archStructure types:id="ChatSystem" xsi:type="types:ArchStructure">
+        <types:description xsi:type="instance:Description">Chat System Demo Architecture</types:description>
+        <types:component types:id="Server" xsi:type="types:Component">
+            <types:description xsi:type="instance:Description">Server Component</types:description>
+            <types:interface types:id="Server.IFACE_TOP" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">Server Component Top Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Server_type_topSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:interface types:id="Server.IFACE_BOTTOM" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">Server Component Bottom Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Server_type_bottomSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:type xlink:href="#Server_type" xlink:type="simple" xsi:type="instance:XMLLink"/>
+        </types:component>
+        <types:component types:id="ChatClient1" xsi:type="types:Component">
+            <types:description xsi:type="instance:Description">Chat Client 1 Component</types:description>
+            <types:interface types:id="ChatClient1.IFACE_TOP" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">Chat Client 1 Component Top Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Client_type_topSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:interface types:id="ChatClient1.IFACE_BOTTOM" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">Chat Client 1 Component Bottom Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Client_type_bottomSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:type xlink:href="#Client_type" xlink:type="simple" xsi:type="instance:XMLLink"/>
+        </types:component>
+        <types:component types:id="ChatClient2" xsi:type="types:Component">
+            <types:description xsi:type="instance:Description">Chat Client 2 Component</types:description>
+            <types:interface types:id="ChatClient2.IFACE_TOP" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">Chat Client 2 Component Top Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Client_type_topSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:interface types:id="ChatClient2.IFACE_BOTTOM" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">Chat Client 2 Component Bottom Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Client_type_bottomSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:type xlink:href="#Client_type" xlink:type="simple" xsi:type="instance:XMLLink"/>
+        </types:component>
+        <types:connector types:id="Bus" xsi:type="types:Connector">
+            <types:description xsi:type="instance:Description">The Bus</types:description>
+            <types:interface types:id="Bus.IFACE_TOP" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">The Bus Top Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Bus_type_topSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:interface types:id="Bus.IFACE_BOTTOM" xsi:type="types:Interface">
+                <types:description xsi:type="instance:Description">The Bus Bottom Interface</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <types:signature xlink:href="#Bus_type_bottomSig" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:interface>
+            <types:type xlink:href="#Bus_type" xlink:type="simple" xsi:type="instance:XMLLink"/>
+        </types:connector>
+        <types:link types:id="Server_to_Bus" xsi:type="types:Link">
+            <types:description xsi:type="instance:Description">Server to Bus Link</types:description>
+            <types:point xsi:type="instance:Point">
+                <instance:anchorOnInterface xlink:href="#Server.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:point>
+            <types:point xsi:type="instance:Point">
+                <instance:anchorOnInterface xlink:href="#Bus.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:point>
+        </types:link>
+        <types:link types:id="Bus_to_ChatClient1" xsi:type="types:Link">
+            <types:description xsi:type="instance:Description">Bus to ChatClient1 Link</types:description>
+            <types:point xsi:type="instance:Point">
+                <instance:anchorOnInterface xlink:href="#Bus.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:point>
+            <types:point xsi:type="instance:Point">
+                <instance:anchorOnInterface xlink:href="#ChatClient1.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:point>
+        </types:link>
+        <types:link types:id="Bus_to_ChatClient2" xsi:type="types:Link">
+            <types:description xsi:type="instance:Description">Bus to ChatClient2 Link</types:description>
+            <types:point xsi:type="instance:Point">
+                <instance:anchorOnInterface xlink:href="#Bus.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:point>
+            <types:point xsi:type="instance:Point">
+                <instance:anchorOnInterface xlink:href="#ChatClient2.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:point>
+        </types:link>
+    </types:archStructure>
+    <types:archTypes xsi:type="types:ArchTypes">
+        <types:componentType types:id="Server_type" xsi:type="implementation:VariantComponentTypeImpl">
+            <types:description xsi:type="instance:Description">Server Component Type</types:description>
+            <types:signature types:id="Server_type_topSig" xsi:type="types:Signature">
+                <types:description xsi:type="instance:Description">Server_type_topSig</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:signature>
+            <types:signature types:id="Server_type_bottomSig" xsi:type="types:Signature">
+                <types:description xsi:type="instance:Description">Server_type_bottomSig</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:signature>
+            <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
+                <javaimplementation:mainClass xsi:type="javaimplementation:JavaClassFile">
+                    <javaimplementation:javaClassName xsi:type="javaimplementation:JavaClassName">c2demo.chatsys.ServerC2Component</javaimplementation:javaClassName>
+                </javaimplementation:mainClass>
+            </implementation:implementation>
+        </types:componentType>
+        <types:componentType types:id="Client_type" xsi:type="implementation:VariantComponentTypeImpl">
+            <types:description xsi:type="instance:Description">Client Component Type</types:description>
+            <types:signature types:id="Client_type_topSig" xsi:type="types:Signature">
+                <types:description xsi:type="instance:Description">Client_type_topSig</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:signature>
+            <types:signature types:id="Client_type_bottomSig" xsi:type="types:Signature">
+                <types:description xsi:type="instance:Description">Client_type_bottomSig</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:signature>
+            <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
+                <javaimplementation:mainClass xsi:type="javaimplementation:JavaClassFile">
+                    <javaimplementation:javaClassName xsi:type="javaimplementation:JavaClassName">c2demo.chatsys.ClientC2Component</javaimplementation:javaClassName>
+                </javaimplementation:mainClass>
+            </implementation:implementation>
+        </types:componentType>
+        <types:connectorType types:id="Bus_type" xsi:type="implementation:VariantConnectorTypeImpl">
+            <types:description xsi:type="instance:Description">Bus Connector Type</types:description>
+            <types:signature types:id="Bus_type_topSig" xsi:type="types:Signature">
+                <types:description xsi:type="instance:Description">Bus_type_topSig</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2TopType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:signature>
+            <types:signature types:id="Bus_type_bottomSig" xsi:type="types:Signature">
+                <types:description xsi:type="instance:Description">Bus_type_bottomSig</types:description>
+                <types:direction xsi:type="instance:Direction">inout</types:direction>
+                <types:type xlink:href="#C2BottomType" xlink:type="simple" xsi:type="instance:XMLLink"/>
+            </types:signature>
+            <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
+                <javaimplementation:mainClass xsi:type="javaimplementation:JavaClassFile">
+                    <javaimplementation:javaClassName xsi:type="javaimplementation:JavaClassName">c2.legacy.conn.BusConnector</javaimplementation:javaClassName>
+                </javaimplementation:mainClass>
+            </implementation:implementation>
+        </types:connectorType>
+        <types:interfaceType types:id="C2TopType" xsi:type="implementation:InterfaceTypeImpl">
+            <types:description xsi:type="instance:Description">C2 Top Interface</types:description>
+            <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
+                <javaimplementation:mainClass xsi:type="javaimplementation:JavaClassFile">
+                    <javaimplementation:javaClassName xsi:type="javaimplementation:JavaClassName">c2.fw.SimpleInterface</javaimplementation:javaClassName>
+                </javaimplementation:mainClass>
+            </implementation:implementation>
+            <implementation:implementation xsi:type="lookupimplementation:LookupImplementation">
+                <lookupimplementation:name xsi:type="lookupimplementation:LookupName">IFACE_TOP</lookupimplementation:name>
+            </implementation:implementation>
+        </types:interfaceType>
+        <types:interfaceType types:id="C2BottomType" xsi:type="implementation:InterfaceTypeImpl">
+            <types:description xsi:type="instance:Description">C2 Bottom Interface</types:description>
+            <implementation:implementation xsi:type="javaimplementation:JavaImplementation">
+                <javaimplementation:mainClass xsi:type="javaimplementation:JavaClassFile">
+                    <javaimplementation:javaClassName xsi:type="javaimplementation:JavaClassName">c2.fw.SimpleInterface</javaimplementation:javaClassName>
+                </javaimplementation:mainClass>
+            </implementation:implementation>
+            <implementation:implementation xsi:type="lookupimplementation:LookupImplementation">
+                <lookupimplementation:name xsi:type="lookupimplementation:LookupName">IFACE_BOTTOM</lookupimplementation:name>
+            </implementation:implementation>
+        </types:interfaceType>
+    </types:archTypes>
+<hints3:renderingHints3 xsi:type="hints3:RenderingHints3">
+        <hints3:hintedElement hints3:maintainer="edu.uci.isr.archstudio4.comp.archipelago" hints3:type="XML" hints3:version="4.0.0" xsi:type="hints3:HintBundle"/>
+        <hints3:hintedElement hints3:maintainer="edu.uci.isr.archstudio4.comp.archipelago" hints3:version="4.1.0" xsi:type="hints3:HintBundle">
+            <hints3:hintedElement xsi:type="hints3:HintedElement">
+                <hints3:target xlink:href="#ChatSystem" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Server.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="25,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,1.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10425,10175" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Server.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="0,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,0.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10425,10075" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Server" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="glassBoundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10350,10075,150,100" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="197,203,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/boundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10350,10075,150,100" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#ChatClient1.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="0,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,1.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10325,10400" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#ChatClient1.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="0,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,0.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10325,10300" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#ChatClient1" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="glassBoundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10250,10300,150,100" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="197,203,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/boundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10250,10300,150,100" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#ChatClient2.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="0,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,1.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10525,10400" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#ChatClient2.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="0,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,0.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10525,10300" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#ChatClient2" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="glassBoundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10450,10300,150,100" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="197,203,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/boundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10450,10300,150,100" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Bus.IFACE_BOTTOM" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="-11,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,1.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10425,10250" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Bus.IFACE_TOP" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="tagAnchorRelativeOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="-11,0" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glassAnchorFractionOffset" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{0.5,0.0}" hints3:type="{[F,2,java.lang.Float,java.lang.Float}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,255,255" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/anchorPoint" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10425,10225" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Bus" xlink:type="simple" xsi:type="instance:XMLLink"/>
+                    <hints3:property hints3:name="glassBoundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10275,10225,300,25" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="background/color" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="255,234,191" hints3:type="org.eclipse.swt.graphics.RGB" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/boundingBox" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10275,10225,300,25" hints3:type="org.eclipse.swt.graphics.Rectangle" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    
+                    
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Server_to_Bus" xsi:type="instance:XMLLink" xlink:type="simple"/>
+                    <hints3:property hints3:name="glass/midpoints" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{}" hints3:type="{[Lorg.eclipse.swt.graphics.Point;,0}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint1" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10425,10180" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint1-StuckInfo" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{EDGE_FROM_CENTER}" hints3:type="{[Ljava.lang.Object;,1,enum:edu.uci.isr.bna4.logics.coordinating.MaintainStickyPointLogic$StickyMode}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint2" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10425,10220" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint2-StuckInfo" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{EDGE_FROM_CENTER}" hints3:type="{[Ljava.lang.Object;,1,enum:edu.uci.isr.bna4.logics.coordinating.MaintainStickyPointLogic$StickyMode}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Bus_to_ChatClient1" xsi:type="instance:XMLLink" xlink:type="simple"/>
+                    <hints3:property hints3:name="glass/midpoints" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{}" hints3:type="{[Lorg.eclipse.swt.graphics.Point;,0}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint1" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10420,10253" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint1-StuckInfo" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{EDGE_FROM_CENTER}" hints3:type="{[Ljava.lang.Object;,1,enum:edu.uci.isr.bna4.logics.coordinating.MaintainStickyPointLogic$StickyMode}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint2" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10330,10298" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint2-StuckInfo" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{EDGE_FROM_CENTER}" hints3:type="{[Ljava.lang.Object;,1,enum:edu.uci.isr.bna4.logics.coordinating.MaintainStickyPointLogic$StickyMode}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                </hints3:hintedElement>
+                <hints3:hintedElement xsi:type="hints3:HintedElement">
+                    <hints3:target xlink:href="#Bus_to_ChatClient2" xsi:type="instance:XMLLink" xlink:type="simple"/>
+                    <hints3:property hints3:name="glass/midpoints" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{}" hints3:type="{[Lorg.eclipse.swt.graphics.Point;,0}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint1" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10430,10253" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint1-StuckInfo" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{EDGE_FROM_CENTER}" hints3:type="{[Ljava.lang.Object;,1,enum:edu.uci.isr.bna4.logics.coordinating.MaintainStickyPointLogic$StickyMode}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint2" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="10520,10298" hints3:type="org.eclipse.swt.graphics.Point" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                    <hints3:property hints3:name="glass/endpoint2-StuckInfo" xsi:type="hints3:Property">
+                        <hints3:value hints3:data="{EDGE_FROM_CENTER}" hints3:type="{[Ljava.lang.Object;,1,enum:edu.uci.isr.bna4.logics.coordinating.MaintainStickyPointLogic$StickyMode}" xsi:type="hints3:PropertyValue"/>
+                    </hints3:property>
+                </hints3:hintedElement>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </hints3:hintedElement>
+        </hints3:hintedElement>
+    </hints3:renderingHints3>
+<changes:archChange changes:id="archChangeffa80015-360172fc-fc0b2cbe-0d4d0059" xsi:type="changes:ArchChange">
+        <changes:description xsi:type="instance:Description">Architecture Change Model</changes:description>
+    </changes:archChange>
+</instance:xArch>

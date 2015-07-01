@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ISR System Utilities Plug-in
+Bundle-SymbolicName: edu.uci.isr.sysutils
+Bundle-Version: 4.1.50.qualifier
+Bundle-Vendor: Institute for Software Research, UC Irvine
+Export-Package: edu.uci.isr.sysutils

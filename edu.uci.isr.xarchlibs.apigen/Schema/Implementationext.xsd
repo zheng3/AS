@@ -1,0 +1,99 @@
+<xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd"
+            xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
+            xmlns:archoptions="http://www.ics.uci.edu/pub/arch/xArch/options.xsd"
+            targetNamespace="http://www.ics.uci.edu/pub/arch/xArch/implementationext.xsd"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd"
+              schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd"/>
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd"
+              schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd"/>
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" 
+              schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd"/>
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Implementation XML Schema 1.0
+      
+      Change Log:
+         2014-12-02: Yongjie Zheng [yzheng@umkc.edu]:
+           Created OptionalComponentImpl to add implementation
+           information to optional components in product 
+           line architecture.
+         2013-03-15: Yongjie Zheng [yzheng@umkc.edu]:
+           Created this extension to add implementation
+           information to component, connector, and interafce
+           instances.
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: OptionalComponentImpl
+    
+    TBD.
+   -->
+  <xsd:complexType name="OptionalComponentImpl">
+    <xsd:complexContent>
+      <xsd:extension base="archoptions:OptionalComponent">
+        <xsd:sequence>
+          <xsd:element name="implementation" type="archimpl:Implementation"
+                       minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!--
+    TYPE: ComponentImpl
+    
+    TBD.
+   -->
+  <xsd:complexType name="ComponentImpl">
+    <xsd:complexContent>
+      <xsd:extension base="archtypes:Component">
+        <xsd:sequence>
+          <xsd:element name="implementation" type="archimpl:Implementation"
+                       minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!--
+    TYPE: ConnectorImpl
+    
+    TBD.
+   -->
+  <xsd:complexType name="ConnectorImpl">
+    <xsd:complexContent>
+      <xsd:extension base="archtypes:Connector">
+        <xsd:sequence>
+          <xsd:element name="implementation" type="archimpl:Implementation"
+                       minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!--
+    TYPE: InterfaceImpl
+    
+    TBD.
+   -->
+  <xsd:complexType name="InterfaceImpl">
+    <xsd:complexContent>
+      <xsd:extension base="archtypes:Interface">
+        <xsd:sequence>
+          <xsd:element name="implementation" type="archimpl:Implementation"
+                       minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+</xsd:schema>

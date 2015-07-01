@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+  <extension point="org.eclipse.ui.perspectives">
+    <perspective name="ArchStudio 4"
+                 icon="res/icons/archstudio-icon-16x16.png"
+                 class="edu.uci.isr.archstudio4.perspectives.ArchStudio4PerspectiveFactory"
+                 id="edu.uci.isr.archstudio4.perspectives.ArchStudio4Perspective" />
+  </extension>
+  <extension point="org.eclipse.ui.newWizards">
+    <category id="edu.uci.isr.archstudio4.wizards"
+              name="ArchStudio 4"></category>
+    <wizard id="edu.uci.isr.archstudio4.comp.fileman.NewFileWizard"
+            name="ArchStudio Architecture Description"
+            class="edu.uci.isr.archstudio4.comp.fileman.NewFileWizard"
+            category="edu.uci.isr.archstudio4.wizards"
+            icon="res/icons/archstudio-document-icon-16x16.gif">
+      <description>Create a new architecture
+      description</description>
+      <selection class="org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+  <extension point="org.eclipse.ui.preferencePages">
+    <page class="edu.uci.isr.archstudio4.comp.basepreferences.ArchStudioPreferencePanel"
+          id="edu.uci.isr.archstudio4.ArchStudioPreferences"
+          name="ArchStudio 4" />
+    <page class="edu.uci.isr.archstudio4.comp.archlight.prefs.ArchlightPreferencePanel"
+          id="edu.uci.isr.archstudio4.comp.archlight.prefs.ArchlightPreferencePanel"
+          category="edu.uci.isr.archstudio4.ArchStudioPreferences"
+          name="Archlight" />
+    <page class="edu.uci.isr.archstudio4.comp.archlight.tools.schematron.SchematronPreferencePanel"
+          id="edu.uci.isr.archstudio4.comp.archlight.tools.schematron.SchematronPreferencePanel"
+          category="edu.uci.isr.archstudio4.comp.archlight.prefs.ArchlightPreferencePanel"
+          name="Schematron" />
+    <page class="edu.uci.isr.archstudio4.comp.editormanager.EditorPreferencePanel"
+          id="edu.uci.isr.archstudio4.comp.editormanager.EditorPreferencePanel"
+          category="edu.uci.isr.archstudio4.ArchStudioPreferences"
+          name="Editors" />
+    <page class="edu.uci.isr.archstudio4.comp.graphlayout.GraphLayoutPreferencePanel"
+          id="edu.uci.isr.archstudio4.comp.graphlayout.GraphLayoutPreferencePanel"
+          category="edu.uci.isr.archstudio4.ArchStudioPreferences"
+          name="Graph Layout" />
+    <page class="edu.uci.isr.archstudio4.comp.archipelago.prefs.ArchipelagoPreferencePanel"
+          id="edu.uci.isr.archstudio4.comp.archipelago.prefs.ArchipelagoPreferencePanel"
+          category="edu.uci.isr.archstudio4.ArchStudioPreferences"
+          name="Archipelago" />
+    <page class="edu.uci.isr.archstudio4.comp.archipelago.prefs.types.ArchipelagoTypesPreferencePanel"
+          id="edu.uci.isr.archstudio4.comp.archipelago.prefs.types.ArchipelagoTypesPreferencePanel"
+          category="edu.uci.isr.archstudio4.comp.archipelago.prefs.ArchipelagoPreferencePanel"
+          name="Structure and Types" />
+  </extension>
+  <extension point="org.eclipse.ui.views">
+    <view
+          category="edu.uci.isr.archstudio4.views"
+          class="edu.uci.isr.archstudio4.comp.launcher.LauncherView"
+          icon="res/icons/archstudio-icon-16x16.png"
+          id="edu.uci.isr.archstudio4.comp.launcher.LauncherView"
+          name="ArchStudio 4 Launcher"/>
+    <view
+          category="edu.uci.isr.archstudio4.views"
+          class="edu.uci.isr.archstudio4.comp.fileman.FileManagerView"
+          icon="res/icons/archstudio-icon-16x16.png"
+          id="edu.uci.isr.archstudio4.comp.fileman.FileManagerView"
+          name="File Manager View"/>
+    <view
+          category="edu.uci.isr.archstudio4.views"
+          class="edu.uci.isr.archstudio4.comp.filetracker.FileTrackerView"
+          icon="res/icons/archstudio-icon-16x16.png"
+          id="edu.uci.isr.archstudio4.comp.filetracker.FileTrackerView"
+          name="File Tracker View"/>
+    <view
+          category="edu.uci.isr.archstudio4.views"
+          class="edu.uci.isr.archstudio4.comp.archlight.issueview.ArchlightIssueView"
+          icon="res/icons/archstudio-icon-16x16.png"
+          id="edu.uci.isr.archstudio4.comp.archlight.issueview.ArchlightIssueView"
+          name="Archlight Issues"/>
+    <view
+          category="edu.uci.isr.archstudio4.views"
+          class="edu.uci.isr.archstudio4.comp.archlight.noticeview.ArchlightNoticeView"
+          icon="res/icons/archstudio-icon-16x16.png"
+          id="edu.uci.isr.archstudio4.comp.archlight.noticeview.ArchlightNoticeView"
+          name="Archlight Notices"/>
+    <category
+          id="edu.uci.isr.archstudio4.views"
+          name="ArchStudio 4">
+    </category>
+  </extension>
+  <extension point="org.eclipse.ui.editors">
+    <editor class="edu.uci.isr.archstudio4.comp.archipelago.ArchipelagoEditor"
+            icon="res/icons/archstudio-document-icon-16x16.gif"
+            id="edu.uci.isr.archstudio4.comp.archipelago.ArchipelagoEditor"
+            name="Archipelago">
+      <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding" />
+    </editor>
+    <editor class="edu.uci.isr.archstudio4.comp.selectordriver.SelectorDriverEditor"
+            icon="res/icons/archstudio-document-icon-16x16.gif"
+            id="edu.uci.isr.archstudio4.comp.selectordriver.SelectorDriverEditor"
+            name="Product-Line Selector">
+      <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding" />
+    </editor>
+    <editor class="edu.uci.isr.archstudio4.comp.changesetsviewer.ChangeSetsViewerEditor"
+            icon="res/icons/archstudio-document-icon-16x16.gif"
+            id="edu.uci.isr.archstudio4.comp.changesetsviewer.ChangeSetsViewerEditor"
+            name="ChangeSet Viewer">
+      <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding" />
+    </editor>
+    <editor class="edu.uci.isr.archstudio4.comp.archedit.ArchEditEditor"
+            icon="res/icons/archstudio-document-icon-16x16.gif"
+            id="edu.uci.isr.archstudio4.comp.archedit.ArchEditEditor"
+            name="ArchEdit">
+      <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding" />
+    </editor>
+    <editor class="edu.uci.isr.archstudio4.comp.typewrangler.TypeWranglerEditor"
+            icon="res/icons/archstudio-document-icon-16x16.gif"
+            id="edu.uci.isr.archstudio4.comp.typewrangler.TypeWranglerEditor"
+            name="Type Wrangler">
+      <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding" />
+    </editor>
+    <editor class="edu.uci.isr.archstudio4.comp.archlight.ArchlightEditor"
+            icon="res/icons/archstudio-document-icon-16x16.gif"
+            id="edu.uci.isr.archstudio4.comp.archlight.ArchlightEditor"
+            name="Archlight">
+      <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding" />
+    </editor>
+    <editor
+          class="edu.uci.isr.archstudio4.comp.aimlauncher.AIMLauncherEditor"
+          default="false"
+          icon="res/icons/archstudio-document-icon-16x16.gif"
+          id="edu.uci.isr.archstudio4.comp.aim.AIMLauncherEditor"
+          name="AIM Launcher">
+       <contentTypeBinding contentTypeId="edu.uci.isr.archstudio4.xadlContentBinding"/>
+    </editor>
+    <editor
+          class="edu.uci.isr.archstudio4.comp.changesetsviewer.ChangeSetsViewerEditor"
+          icon="res/icons/archstudio-document-icon-16x16.gif"
+          id="edu.uci.isr.archstudio4.comp.changesetsviewer.ChangeSetsViewerEditor"
+          name="ChangeSet Viewer">
+    </editor>
+  </extension>
+  <extension point="org.eclipse.core.runtime.contentTypes">
+    <content-type id="xadlContentBinding"
+                  name="name"
+                  base-type="org.eclipse.core.runtime.xml"
+                  file-extensions="macrodef,ent,xml"
+                  priority="normal">
+      <describer class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
+
+        <parameter name="element"
+                   value="xArch" />
+      </describer>
+    </content-type>
+  </extension>
+  <extension id="ArchStudioNature"
+             name="ArchStudio 4 Nature"
+             point="org.eclipse.core.resources.natures">
+    <runtime>
+      <run class="edu.uci.isr.archstudio4.natures.ArchStudio4Nature" />
+    </runtime>
+  </extension>
+  <extension
+        id="edu.uci.isr.archstudio4.xmessenger"
+        name="Architecture Change Notification"
+        point="org.eclipse.core.resources.markers">
+     <super
+           type="org.eclipse.core.resources.problemmarker">
+     </super>
+     <persistent
+           value="false">
+     </persistent>
+  </extension>
+</plugin>

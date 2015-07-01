@@ -1,0 +1,214 @@
+<xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/changes.xsd"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+            xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd"
+            xmlns:archinteractions="http://www.ics.uci.edu/pub/arch/xArch/interactions.xsd"
+            xmlns:archstatecharts="http://www.ics.uci.edu/pub/arch/xArch/statecharts.xsd"
+            targetNamespace="http://www.ics.uci.edu/pub/arch/xArch/changes.xsd"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified">
+
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+              schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd"
+              schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd"/>
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/interactions.xsd"
+              schemaLocation="http://www.ics.uci.edu/~zhengy/schema/interactions.xsd"/>
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/statecharts.xsd"
+              schemaLocation="http://www.ics.uci.edu/~zhengy/schema/statecharts.xsd"/>
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Change XML Schema 1.0
+      
+      Change Log:
+         2011-07-16: Yongjie Zheng [zhengy@ics.uci.edu]:
+           Added the statechartChange element.
+         2011-06-27: Yongjie Zheng [zhengy@ics.uci.edu]:
+           Changed BehaviorChange to InteractionChange.
+           Added the interactionChange element.
+         2011-04-05: Yongjie Zheng [zhengy@ics.uci.edu]:
+           Added InterfaceChange, PropertyChange to provide detailed information
+           on change notification.
+         2011-04-04: Yongjie Zheng [zhengy@ics.uci.edu]:
+           Added copyOfRemovedComponent,copyOfRemovedInterface, copyOfRemovedLink 
+           to record the information of removed elements.
+         2011-03-01: Yongjie Zheng [zhengy@ics.uci.edu]:
+           Initial Development
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    ELEMENT: archChange
+    
+    The archChange element is the root element that records all the 
+    design-time changes of the architecture.
+   -->
+  <xsd:element name="archChange" type="ArchChange"/>
+
+
+  <!--
+    TYPE: ArchChange
+   -->
+  <xsd:complexType name="ArchChange">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="changes"   type="Changes"
+                   minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+  </xsd:complexType>
+
+
+  <!--
+    TYPE: Changes
+   -->
+  <xsd:complexType name="Changes">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="componentChange"   type="ComponentChange"
+                   minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="linkChange"   type="LinkChange"
+                   minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="interactionChange"        type="InteractionChange"
+                   minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="statechartChange"        type="StatechartChange"
+                   minOccurs="0" maxOccurs="unbounded"/>      
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="status"      type="Status"/>
+  </xsd:complexType>
+
+
+  <!--
+    TYPE: Status
+   -->
+  <xsd:complexType name="Status">
+    <xsd:simpleContent>
+      <xsd:extension base="StatusSimpleType"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="StatusSimpleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="mapped"/>
+      <xsd:enumeration value="unmapped"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+
+  <!--
+    TYPE: Status
+   -->
+  <xsd:complexType name="ChangeType">
+    <xsd:simpleContent>
+      <xsd:extension base="ChangeTypeSimpleType"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="ChangeTypeSimpleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="add"/>
+      <xsd:enumeration value="update"/>
+      <xsd:enumeration value="remove"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+
+  <!--
+    TYPE: ComponentChange
+   -->
+  <xsd:complexType name="ComponentChange">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="component" type="archinstance:XMLLink"/>
+      <xsd:element name="copyOfRemovedComponent" type="archtypes:Component"
+                   minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="interfaceChange" type="InterfaceChange"
+                   minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="propertyChange" type="PropertyChange"
+                   minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="type"        type="ChangeType"/>
+  </xsd:complexType>
+
+  <!--
+    TYPE: InterfaceChange
+   -->
+  <xsd:complexType name="InterfaceChange">
+    <xsd:sequence>
+      <xsd:element name="interface" type="archinstance:XMLLink"/>
+      <xsd:element name="copyOfRemovedInterface" type="archtypes:Interface"
+                   minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="type"        type="ChangeType"/>
+  </xsd:complexType>
+
+  <!--
+    TYPE: PropertyChange
+   -->
+  <xsd:complexType name="PropertyChange">
+    <xsd:sequence>
+      <xsd:element name="propertyName" type="StringType"/>
+      <xsd:element name="oldValue" type="StringType"
+                   minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="type"        type="ChangeType"/>
+  </xsd:complexType>
+
+  <!--
+    TYPE: StringType
+   -->
+  <xsd:complexType name="StringType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!--
+    TYPE: LinkChange
+   -->
+  <xsd:complexType name="LinkChange">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="link" type="archinstance:XMLLink"/>
+      <xsd:element name="copyOfRemovedLink" type="archtypes:Link"
+                   minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="type"        type="ChangeType"/>
+  </xsd:complexType>
+
+  <!--
+    TYPE: InteractionChange
+   -->
+  <xsd:complexType name="InteractionChange">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="interaction" type="archinstance:XMLLink"/>
+      <xsd:element name="copyOfRemovedInteraction" type="archinteractions:Interaction"
+                   minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="type"        type="ChangeType"/>
+  </xsd:complexType>
+
+  <!--
+    TYPE: StatechartChange
+   -->
+  <xsd:complexType name="StatechartChange">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="statechart" type="archinstance:XMLLink"/>
+      <xsd:element name="copyOfRemovedStatechart" type="archstatecharts:Statechart"
+                   minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    <xsd:attribute name="type"        type="ChangeType"/>
+  </xsd:complexType>
+
+</xsd:schema>

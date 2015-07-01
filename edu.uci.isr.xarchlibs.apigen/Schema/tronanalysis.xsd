@@ -1,0 +1,63 @@
+
+<!-- saved from url=(0057)http://isr.uci.edu/projects/xarchuci/ext/tronanalysis.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/tronanalysis.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:archinst="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:archanalysis="http://www.ics.uci.edu/pub/arch/xArch/analysis.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/tronanalysis.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/analysis.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/analysis.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Tron Analysis XML Schema
+      
+      Depends on: {analysis.xsd, instance.xsd}
+         
+      Change Log:
+         2005-03-08: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial development.
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: TronAnalysis
+
+    The TronAnalysis type extends the abstract Analysis type
+    and contains an identifier, a description, and a
+    set of Tron tests.  Each Tron test identifies a specific
+    test that is expected to pass on this architecture
+    description.
+   -->
+  <xsd:complextype name="TronAnalysis">
+    <xsd:complexcontent>
+      <xsd:extension base="archanalysis:Analysis">
+        <xsd:sequence>
+          <xsd:element name="description" type="archinst:Description">
+          <xsd:element name="test" type="Test" minoccurs="0" maxoccurs="unbounded">
+        </xsd:element></xsd:element></xsd:sequence>
+        <xsd:attribute name="id" type="archinst:Identifier">
+      </xsd:attribute></xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: Test
+    
+    The Tron Test type contains the data necessary to identify
+    a Tron Test that should pass on this architecture description.
+    Tests are identified by their Unique IDs (UIDs), as well
+    as a descriptive string that identifies the test (when
+    the UID cannot be located), and an indicator of whether
+    the test is enabled (currently being applied) or
+    disabled (temporarily not applied).
+   -->
+  <xsd:complextype name="Test">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinst:Description">
+    </xsd:element></xsd:sequence>
+    <xsd:attribute name="id" type="archinst:Identifier">
+    <xsd:attribute name="enabled" type="xsd:boolean">
+  </xsd:attribute></xsd:attribute></xsd:complextype>
+  
+</xsd:import></xsd:import></xsd:schema>
+</body></html>

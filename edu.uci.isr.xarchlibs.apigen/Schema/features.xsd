@@ -1,0 +1,281 @@
+<xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/features.xsd"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+            xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd"
+            targetNamespace="http://www.ics.uci.edu/pub/arch/xArch/features.xsd"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified">
+
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd"
+              schemaLocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd"/>
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd"
+              schemaLocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd"/>
+  
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Change XML Schema 1.0
+      
+      Change Log:
+         2014-10-05: Varun Narisetty [vnck6@mail.umkc.edu]:
+		  Added two Name,BindingTime,Default and Type elements to Feature
+		  Implemented two types of Features (OptionalFeature and AlternativeFeature)
+		  Changed DisplayOptions to FeatureOptions to store general properties of Feature like feature Symbol.
+         2014-06-28: Varun Narisetty [vnck6@mail.umkc.edu]:
+           Initial Development
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    ELEMENT: archChange
+    
+    The archFeature element is the root element that records all the 
+    features of the product line architecture.
+   -->
+   
+  <xsd:element name="archFeature" type="ArchFeature"/>
+  
+
+
+
+  <!--
+    TYPE: ArchFeature
+   -->
+  <xsd:complexType name="ArchFeature">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinstance:Description"/>
+      <xsd:element name="feature"   type="Feature"
+                   minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+  </xsd:complexType>
+
+
+  <!--
+    TYPE: Feature
+   -->
+  <xsd:complexType name="Feature">
+    <xsd:sequence>
+	<xsd:element name="featureName" type="FeatureName"/>
+    <xsd:element name="description" type="archinstance:Description"/>
+	<xsd:element name="type" type="FeatureType"/>
+	<xsd:element name="bindingTime" type="BindingTime"/>
+	<xsd:element name="defaultValue" type="DefaultValue"/>
+	
+	
+	  
+      
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    
+  </xsd:complexType>
+
+
+   <!--
+    TYPE: FeatureName
+   -->
+  <xsd:complexType name="FeatureName">
+   
+    <xsd:attribute name="value" type="xsd:string"/>
+    
+  </xsd:complexType>
+  
+     <!--
+    TYPE: FeatureType
+   -->
+  <xsd:complexType name="FeatureType">
+   
+    <xsd:attribute name="value" type="xsd:string"/>
+    
+  </xsd:complexType>
+  
+      <!--
+    TYPE: BindingTime
+   -->
+  <xsd:complexType name="BindingTime">
+   
+    <xsd:attribute name="value" type="xsd:string"/>
+    
+  </xsd:complexType>
+  
+      <!--
+    TYPE: DefaultValue
+   -->
+  <xsd:complexType name="DefaultValue">
+   
+    <xsd:attribute name="value" type="xsd:string"/>
+    
+  </xsd:complexType>
+  
+  
+  <!--
+    TYPE: Status
+  
+  <xsd:complexType name="Status">
+    <xsd:simpleContent>
+      <xsd:extension base="StatusSimpleType"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="StatusSimpleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="mapped"/>
+      <xsd:enumeration value="unmapped"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+	-->
+
+  <!--
+    TYPE: ChangeType
+   
+  <xsd:complexType name="ChangeType">
+    <xsd:simpleContent>
+      <xsd:extension base="ChangeTypeSimpleType"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="ChangeTypeSimpleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="add"/>
+      <xsd:enumeration value="update"/>
+      <xsd:enumeration value="remove"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+-->
+
+  <!--
+    TYPE: FeatureOptions
+  -->
+    <xsd:complexType name="FeatureOptions">
+    <xsd:sequence>
+      
+	  <xsd:element name="featureColor" type="FeatureColor"/>
+      <xsd:element name="featureSymbol" type="FeatureSymbol"/>
+      
+      
+    </xsd:sequence>
+    <xsd:attribute name="id"   type="archinstance:Identifier"/>
+    
+  </xsd:complexType>
+  
+  
+   <!--
+    TYPE: FeatureColor
+  -->
+    <xsd:complexType name="FeatureColor">
+    <xsd:sequence>
+      
+     <xsd:element name="value" type="ColorValue"/>
+      
+    </xsd:sequence>
+    
+    
+  </xsd:complexType>
+  
+  
+    <!--
+    TYPE: ColorValue
+   -->
+  <xsd:complexType name="ColorValue">
+   
+    <xsd:attribute name="type" type="xsd:string"/>
+    <xsd:attribute name="data" type="xsd:string"/>
+  </xsd:complexType>
+  
+     <!--
+    TYPE: FeatureSymbol
+   -->
+  <xsd:complexType name="FeatureSymbol">
+   
+    <xsd:attribute name="value" type="xsd:string"/>
+    
+  </xsd:complexType>
+  
+
+  <!--
+    TYPE: FeatureElements
+   -->
+  <xsd:complexType name="FeatureElements">
+    <xsd:sequence>
+      
+      <xsd:element name="archElement" type="archinstance:XMLLink"
+			minOccurs="0" maxOccurs="unbounded"/>
+      
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    
+  </xsd:complexType>
+
+    <!--
+    TYPE: OptionalFeature
+    
+    The OptionalFeature type extends the Feature type
+    and add the feature elements and feature options to it.  
+   -->
+  <xsd:complexType name="OptionalFeature">
+    <xsd:complexContent>
+      <xsd:extension base="Feature">
+        <xsd:sequence>
+        <xsd:element name="featureOptions" type = "FeatureOptions"/>
+	  
+		<xsd:element name="featureElements"   type="FeatureElements"/>
+        
+		</xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  
+  <!--
+    TYPE: AlternativeFeature
+    
+    The OptionalFeature type extends the Feature type
+    and add the feature elements and feature options to it.  
+   -->
+  <xsd:complexType name="AlternativeFeature">
+    
+     <xsd:complexContent>
+      <xsd:extension base="Feature">
+        <xsd:sequence>
+		<xsd:element name="featureElements"   type="FeatureElements"/>
+        <xsd:element name="featureVarients" type = "FeatureVarients"/>
+	  </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  
+  </xsd:complexType>
+  
+  
+    <!--
+    TYPE: FeatureVarients
+   -->
+  <xsd:complexType name="FeatureVarients">
+    <xsd:sequence>
+      
+      <xsd:element name="varient" type="Varient"
+			minOccurs="0" maxOccurs="unbounded"/>
+      
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    
+  </xsd:complexType>
+  
+  
+      <!--
+    TYPE: Varient
+   -->
+  <xsd:complexType name="Varient">
+    <xsd:sequence>
+    <xsd:element name="name" type="FeatureName"/>
+    <xsd:element name="description" type="archinstance:Description"/>
+    <xsd:element name="featureOptions" type = "FeatureOptions"/>
+	  
+	<xsd:element name="featureElements"   type="FeatureElements"/>
+      
+    </xsd:sequence>
+    <xsd:attribute name="id"          type="archinstance:Identifier"/>
+    
+  </xsd:complexType>
+
+</xsd:schema>

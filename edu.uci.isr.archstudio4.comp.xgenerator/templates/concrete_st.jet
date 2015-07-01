@@ -1,0 +1,74 @@
+package <c:get select="$archDefinedPackage" />;
+
+<java:importsLocation package="{$archDefinedPackage}"/>
+
+public class ${$compDesp}${$stateDesp}State extends ${$compDesp}State {
+
+	public ${$compDesp}${$stateDesp}State(${$archDefinedClass} host){
+		super(host);
+	}
+
+<%--
+  For each "in" interface, do the following.
+  Step 0: load the interface java file.
+  Step 1: import what is explictly imported in the interface file.
+  Step 2: implement the methods declared in the interface by forwarding whatever requests to the implementor.
+--%>
+<c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID">
+  <%--Step 0--%>
+  <mytag:loadClass project="{$org.eclipse.jet.resource.project.name}" fqn="{//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName}" var="root" />
+    <%--Step 1--%>
+    <c:with select="$root//imports[@nodeType='ImportDeclaration']">//To be imported: </c:with><c:iterate select="$root//imports[@nodeType='ImportDeclaration']" delimiter=','><java:import>${name[@nodeType='QualifiedName']}</java:import></c:iterate>
+    <%--Step 2--%>
+    <c:iterate select="$root//bodyDeclarations[@nodeType = 'MethodDeclaration']">
+    <c:choose>
+    <%--Methods that are defined by interaction diagrams--%>
+    <c:when test="javadoc/tags[1]//@tagName='@see'">
+    ${modifiers/@keyword} ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate> {
+    		<c:with select="javadoc/tags[1]//fragments[@nodeType='TextElement']/@text" var="interactionId">
+    		<c:iterate select="$xarch/interaction[@id=trimWhitespace($interactionId)]/message">
+    		<%--A little bit tricky below: just to add implementation decisions in--%>
+    		<c:choose>
+    		<c:when test="interfaceClassName">
+    		<c:choose>
+    		<c:when test="contains(string(description),'=')">
+		${substring-before(string(description),'=')} = _host.OUT_${concat(className(string(interfaceClassName)), '.', trimWhitespace(substring-after(string(description),'=')))};
+    		</c:when>
+    		<c:otherwise>
+		_host.OUT_${concat(className(string(interfaceClassName)), '.', trimWhitespace(string(description)))};
+    		</c:otherwise>
+    		</c:choose>
+    		</c:when>
+    		<c:otherwise>
+		${description};
+    		</c:otherwise>  		
+    		</c:choose>
+		<%--tricky ends here--%>
+    		</c:iterate>
+    		</c:with>
+    }    
+    </c:when>
+    <%--Trigger Events--%>
+    <c:when test="$scRef/transition[substring(string(fromState/@href),2)=$currState/@id]/trigger=name/@identifier">
+    ${modifiers/@keyword} ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate> {
+		<c:setVariable select="name/@identifier" var="mthdName" />
+		<c:setVariable select="$scRef/transition[(substring(string(fromState/@href),2)=$currState/@id) and (trigger=$mthdName)]" var="tran" />
+		<c:if test="$tran/effect">
+		${$tran/effect};		
+		</c:if>
+		<c:if test="string($tran/fromState/@href)!=string($tran/toState/@href)">
+		_host.setState(_host.${removeWhitespace($scRef/state[@id=substring(string($tran/toState/@href),2)]/description)}State);
+		</c:if>
+		<c:if test="returnType2/@nodeType!='PrimitiveType' or returnType2/@primitiveTypeCode!='void'">return </c:if>_host._imp.${name/@identifier}(<c:iterate select="parameters" delimiter=','>${name/@identifier}</c:iterate>);
+    }
+    </c:when>
+    <%--Other Methods--%>
+    <c:otherwise>
+    ${modifiers/@keyword} ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate> {
+		<c:if test="returnType2/@nodeType!='PrimitiveType' or returnType2/@primitiveTypeCode!='void'">return </c:if>_host._imp.${name/@identifier}(<c:iterate select="parameters" delimiter=','>${name/@identifier}</c:iterate>);
+    }    
+    </c:otherwise>    
+    </c:choose>
+    </c:iterate>
+</c:iterate> 
+}

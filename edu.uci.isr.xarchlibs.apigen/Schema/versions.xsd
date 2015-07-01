@@ -1,0 +1,234 @@
+
+<!-- saved from url=(0053)http://isr.uci.edu/projects/xarchuci/ext/versions.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/versions.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:archinst="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/versions.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Versions XML Schema 1.0
+      
+      Depends on: {types.xsd, implementation.xsd, variants.xsd}
+         Note: The actual dependency set of versioning is
+         just types, but because of XSchema 1.0's single inheritance
+         limitation, we decided to have it depend on implementation
+         and variants as well.  When XSchema 2.0 is released,
+         supporting multiple inheritance, this dependency should be
+         removed.
+      Change Log:
+         2002-07-23: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed location of core (xArch) schema in the import
+           statement to a more stable URL.
+         2002-04-21: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Removed child link from nodes, for real this time :)
+           Special thanks to Rob Egelink [egelink@ics.uci.edu].
+         2002-03-27: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed name of "version trees" to "version graphs."
+           Removed child link from nodes.  Added optional
+           "immutable" boolean attribute to nodes.
+           Special thanks to Rob Egelink [egelink@ics.uci.edu].
+         2002-01-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Upgraded to 2001 XML Schema standard and validated
+           with XML Spy 4.2.  Only changes were to the namespace
+           declaration for 'xsd' in the header.
+         2001-04-12: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Cleaned up and validated with XML Spy 3.5.
+         2000-12-07: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed name of file from 'versioning.xsd' to
+           'versions.xsd' for consistency.
+         2000-12-06: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Added 'id' attribute to Node.
+           Thanks to Nathan D. Ryan [Nathan.Ryan@colorado.edu].
+         2000-12-04: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Removed explicit collection elements and replaced
+           them with Kleene-star style elements for greater
+           flexibility and extensibility.
+         2000-09-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development and validated with XSV
+
+    </xsd:documentation>
+  </xsd:annotation>
+  
+  <!--
+    ELEMENT: archVersions
+    
+    The archVersions element (of type ArchVersions) is the root element
+    that is the aegis over all version graphs in the architecture.
+    See the ArchVersions type for more detailed information.
+   -->
+  <xsd:element name="archVersions" type="ArchVersions">
+  
+  <!--
+    TYPE: VersionID
+
+    A VersionID is an opaque string containing a version
+    identifier for some component, connector, or interface
+    type.  You may extend this type to add your own
+    version ID schema for your project or organization.
+   -->
+  <xsd:simpletype name="VersionID">
+    <xsd:restriction base="xsd:string">
+    </xsd:restriction>
+  </xsd:simpletype>
+
+  <!--
+    TYPE: Node
+
+    The Node type describes a node in the version graph of
+    a component, connector, or interface.  A node consists
+    of a version ID, a set of parents of that version, and
+    a set of children of that version.  Parents and children
+    are represented by XLinks to the parent/child nodes in the
+    version graph.
+
+    The attribute 'immutable' declares whether this version
+    is immutable or not.
+   -->
+  <xsd:complextype name="Node">
+    <xsd:sequence>
+      <xsd:element name="versionID" type="VersionID">
+      <xsd:element name="parent" type="archinst:XMLLink" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:element></xsd:sequence>
+    <xsd:attribute name="id" type="archinst:Identifier">
+    <xsd:attribute name="immutable" type="xsd:boolean" use="optional">
+  </xsd:attribute></xsd:attribute></xsd:complextype>
+  
+  <!--
+    TYPE: ComponentTypeVersionGraph
+
+    The ComponentTypeVersionGraph type describes an element
+    that contains a version graph for a particular type
+    of component.
+
+    A version graph consists of a unique identifier that serves
+    to distinguish a single component type (with all its versions)
+    from others, a description of the version graph, and a group of 
+    nodes with parent/child relationships.
+   -->
+  <xsd:complextype name="ComponentTypeVersionGraph">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinst:Description">
+      <xsd:element name="node" type="Node" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:element></xsd:sequence>
+    <xsd:attribute name="id" type="archinst:Identifier">
+  </xsd:attribute></xsd:complextype>
+  
+  <!--
+    TYPE: ConnectorTypeVersionGraph
+
+    The ConnectorTypeVersionGraph type describes an element
+    that contains a version graph for a particular type
+    of connector.
+
+    A version graph consists of a unique identifier that serves
+    to distinguish a single connector type (with all its versions)
+    from others, a description of the version graph, and a group of 
+    nodes with parent/child relationships.
+   -->
+  <xsd:complextype name="ConnectorTypeVersionGraph">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinst:Description">
+      <xsd:element name="node" type="Node" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:element></xsd:sequence>
+    <xsd:attribute name="id" type="archinst:Identifier">
+  </xsd:attribute></xsd:complextype>
+  
+  <!--
+    TYPE: InterfaceTypeVersionGraph
+
+    The InterfaceTypeVersionGraph type describes an element
+    that contains a version graph for a particular type
+    of interface.
+
+    A version graph consists of a unique identifier that serves
+    to distinguish a single interface type (with all its versions)
+    from others, a description of the version graph, and a group of 
+    nodes with parent/child relationships.
+   -->
+  <xsd:complextype name="InterfaceTypeVersionGraph">
+    <xsd:sequence>
+      <xsd:element name="description" type="archinst:Description">
+      <xsd:element name="node" type="Node" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:element></xsd:sequence>
+    <xsd:attribute name="id" type="archinst:Identifier">
+  </xsd:attribute></xsd:complextype>
+  
+  <!--
+    TYPE: ArchVersions
+
+    The ArchVersions type describes the versioning of all component,
+    connector, and interface types in an architecture.  It consists
+    of a component type version graph collection, a connector type
+    version graph collection, and an interface type version graph
+    collection.
+   -->
+  <xsd:complextype name="ArchVersions">
+    <xsd:sequence>
+      <xsd:element name="componentTypeVersionGraph" type="ComponentTypeVersionGraph" minoccurs="0" maxoccurs="unbounded">
+      <xsd:element name="connectorTypeVersionGraph" type="ConnectorTypeVersionGraph" minoccurs="0" maxoccurs="unbounded">
+      <xsd:element name="interfaceTypeVersionGraph" type="InterfaceTypeVersionGraph" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:element></xsd:element></xsd:sequence>
+  </xsd:complextype>
+
+  <!--
+    TYPE: VariantComponentTypeImplVers
+    
+    The VariantComponentTypeImplVers type extends the 
+    VariantComponentTypeImpl type to add the ability to link to 
+    a particular node in a version graph.  The node in the version
+    graph describes which version this particular component type
+    is describing.
+   -->
+  <xsd:complextype name="VariantComponentTypeImplVers">
+    <xsd:complexcontent>
+      <xsd:extension base="archimpl:VariantComponentTypeImpl">
+        <xsd:sequence>
+          <xsd:element name="versionGraphNode" type="archinst:XMLLink">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: VariantConnectorTypeImplVers
+    
+    The VariantConnectorTypeImplVers type extends the 
+    VariantConnectorTypeImpl type to add the ability to link to 
+    a particular node in a version graph.  The node in the version
+    graph describes which version this particular connector type
+    is describing.
+   -->
+  <xsd:complextype name="VariantConnectorTypeImplVers">
+    <xsd:complexcontent>
+      <xsd:extension base="archimpl:VariantConnectorTypeImpl">
+        <xsd:sequence>
+          <xsd:element name="versionGraphNode" type="archinst:XMLLink">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: InterfaceTypeImplVers
+    
+    The InterfaceTypeImplVers type extends the
+    InterfaceTypeImpl type to add the ability to link to 
+    a particular node in a version graph.  The node in the version
+    graph describes which version this particular interface type
+    is describing.
+   -->
+  <xsd:complextype name="InterfaceTypeImplVers">
+    <xsd:complexcontent>
+      <xsd:extension base="archimpl:InterfaceTypeImpl">
+        <xsd:sequence>
+          <xsd:element name="versionGraphNode" type="archinst:XMLLink">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+</xsd:element></xsd:import></xsd:import></xsd:import></xsd:schema>
+</body></html>

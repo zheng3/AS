@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         id=""
+         name=""
+         point="org.eclipse.jet.transform">
+      <transform
+            enableEmbeddedExpressions="true"
+            startTemplate="templates/main.jet"
+            templateLoaderClass="edu.uci.isr.archstudio4.comp.xgenerator.compiled._jet_transformation">
+         <description></description>
+         <tagLibraries>
+            <importLibrary id="org.eclipse.jet.controlTags" usePrefix="c" autoImport="true"/>
+            <importLibrary id="org.eclipse.jet.javaTags" usePrefix="java" autoImport="true"/>
+            <importLibrary id="org.eclipse.jet.formatTags" usePrefix="f" autoImport="true"/>
+            <importLibrary id="org.eclipse.jet.workspaceTags" usePrefix="ws" autoImport="false"/>
+            <importLibrary
+                  autoImport="true"
+                  id="edu.uci.isr.mytaglib.myTags"
+                  usePrefix="mytag">
+            </importLibrary>
+         </tagLibraries>
+      </transform>
+   </extension>
+</plugin>

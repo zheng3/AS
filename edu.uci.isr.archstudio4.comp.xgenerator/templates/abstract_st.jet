@@ -1,0 +1,20 @@
+package <c:get select="$archDefinedPackage" />;
+
+<java:importsLocation package="{$archDefinedPackage}"/>
+
+public abstract class ${$compDesp}State {
+
+	protected <java:import>${$archDefinedPackage}.${$archDefinedClass}</java:import> _host;
+	
+	public ${$compDesp}State (${$archDefinedClass} host){
+		this._host = host;
+	}
+
+<c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID">
+  <mytag:loadClass project="{$org.eclipse.jet.resource.project.name}" fqn="{//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName}" var="root" />
+    <c:with select="$root//imports[@nodeType='ImportDeclaration']">//To be imported: </c:with><c:iterate select="$root//imports[@nodeType='ImportDeclaration']" delimiter=','><java:import>${name[@nodeType='QualifiedName']}</java:import></c:iterate>
+    <c:iterate select="$root//bodyDeclarations[@nodeType = 'MethodDeclaration']">
+    public abstract ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate>;        
+    </c:iterate>
+</c:iterate> 
+}

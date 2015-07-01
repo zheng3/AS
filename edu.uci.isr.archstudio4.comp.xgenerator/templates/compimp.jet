@@ -1,0 +1,60 @@
+package <c:get select="$userDefinedPackage" />;
+
+<java:importsLocation package="{$userDefinedPackage}"/>
+
+public class <c:get select="$userDefinedClass" /> implements <java:import>${$iPrimitivesPackage}.${$iPrimitives}</java:import>
+{
+<%--
+  Architecture Reference
+--%>
+	private <java:import>${$archDefinedPackage}.${$archDefinedClass}</java:import> _arch;
+
+<%--
+  Constructor
+--%>
+    public ${$userDefinedClass} (){
+    }
+
+	public void setArch(${$archDefinedClass} arch){
+		_arch = arch;
+	}
+	public ${$archDefinedClass} getArch(){
+		return _arch;
+	}
+
+	/*
+  	  Myx Lifecycle Methods: these methods are called automatically by the framework
+  	  as the bricks are created, attached, detached, and destroyed respectively.
+	*/	
+	public void init(){
+	    //TODO Auto-generated method stub
+	}
+	public void begin(){
+		//TODO Auto-generated method stub
+	}
+	public void end(){
+		//TODO Auto-generated method stub
+	}
+	public void destroy(){
+		//TODO Auto-generated method stub
+	}
+
+	/*
+  	  Implementation primitives required by the architecture
+	*/
+<c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID">
+  <%--Step 0--%>
+  <mytag:loadClass project="{$org.eclipse.jet.resource.project.name}" fqn="{//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName}" var="root" />
+    <%--Step 1--%>
+    <c:with select="$root//imports[@nodeType='ImportDeclaration']">//To be imported: </c:with><c:iterate select="$root//imports[@nodeType='ImportDeclaration']" delimiter=','><java:import>${name[@nodeType='QualifiedName']}</java:import></c:iterate>
+    <%--Step 2--%>
+    <c:iterate select="$root//bodyDeclarations[@nodeType = 'MethodDeclaration']">
+    <c:if test="not(javadoc/tags[1]//@tagName='@see')">
+    public ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate> {
+		//TODO Auto-generated method stub
+		<c:choose select="returnType2/@nodeType"><c:when test="'PrimitiveType'"><c:choose select="returnType2/@primitiveTypeCode"><c:when test="'int'">return 0;</c:when><c:when test="'double'">return 0;</c:when><c:when test="'boolean'">return false;</c:when></c:choose></c:when><c:otherwise>return null;</c:otherwise></c:choose>
+    }
+    </c:if>        
+    </c:iterate>
+</c:iterate> 
+}

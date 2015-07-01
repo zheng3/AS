@@ -1,0 +1,35 @@
+package <c:get select="$iPrimitivesPackage" />;
+
+<java:importsLocation package="$iPrimitivesPackage"/>
+
+public interface ${$iPrimitives} 
+{
+
+	/*
+	  Getter and Setter of architecture reference
+	*/
+    public void setArch (<java:import>${$archDefinedPackage}.${$archDefinedClass}</java:import> arch);
+	public ${$archDefinedClass} getArch();
+	
+	/*
+  	  Myx Lifecycle Methods: these methods are called automatically by the framework
+  	  as the bricks are created, attached, detached, and destroyed respectively.
+	*/	
+	public void init();	
+	public void begin();
+	public void end();
+	public void destroy();
+
+	/*
+  	  Implementation primitives required by the architecture
+	*/
+<c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID">
+  <mytag:loadClass project="{$org.eclipse.jet.resource.project.name}" fqn="{//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName}" var="root" />
+    <c:with select="$root//imports[@nodeType='ImportDeclaration']">//To be imported: </c:with><c:iterate select="$root//imports[@nodeType='ImportDeclaration']" delimiter=','><java:import>${name[@nodeType='QualifiedName']}</java:import></c:iterate>
+    <c:iterate select="$root//bodyDeclarations[@nodeType = 'MethodDeclaration']">
+    <c:if test="not(javadoc/tags[1]//@tagName='@see')">
+    public ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate>;        
+    </c:if>
+    </c:iterate>
+</c:iterate> 
+}

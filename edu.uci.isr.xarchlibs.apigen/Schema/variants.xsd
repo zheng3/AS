@@ -1,0 +1,110 @@
+
+<!-- saved from url=(0053)http://isr.uci.edu/projects/xarchuci/ext/variants.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:archinst="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" xmlns:archoptions="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Variants XML Schema 1.0
+      
+      Depends on: {types.xsd}
+      
+      Note: this schema imports some XML Schema types from
+      the options.xsd schema for convenience.
+      
+      Change Log:
+         2002-07-23: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed location of core (xArch) schema in the import
+           statement to a more stable URL.
+         2002-01-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Upgraded to 2001 XML Schema standard and validated
+           with XML Spy 4.2.  Only changes were to the namespace
+           declaration for 'xsd' in the header.
+         2001-04-12: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Cleaned up and validated with XML Spy 3.5.
+         2000-12-04: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Removed explicit collection elements and replaced
+           them with Kleene-star style elements for greater
+           flexibility and extensibility.
+         2000-10-13: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development and validated with XSV
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: Variant
+    
+    This type describes a variant that is part of a variant
+    compound type.  If the guard is satisfied (see
+    options.xsd for more description of a guard), then
+    instances of the variant type 'become' the type 
+    pointed to by the variantType XLink.
+   -->
+  <xsd:complextype name="Variant">
+    <xsd:sequence>
+      <xsd:element name="guard" type="archoptions:Guard">
+      <xsd:element name="variantType" type="archinst:XMLLink">        
+    </xsd:element></xsd:element></xsd:sequence>
+  </xsd:complextype>
+  
+  <!--
+    TYPE: VariantComponentType
+    
+    This type is an extension to the ComponentType type
+    (from the types schema) allowing a new kind of compound
+    type called a 'variant component type.'  A variant
+    component type may take on one or more other types,
+    depending on a set of system 'guards.'  This is
+    analogous to the 'union' type in the C or Pascal
+    programming languages.  
+    
+    Note: A component type may be a basic type, a type
+    with substructure, or a variant type.  It may not
+    be a combination of two of these things.  For
+    instance, a component type may not have both
+    substructure and a variantCollection.
+   -->
+  <xsd:complextype name="VariantComponentType">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:ComponentType">
+        <xsd:sequence>
+          <xsd:element name="variant" type="Variant" minoccurs="0" maxoccurs="unbounded">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+  
+  <!--
+    TYPE: VariantConnectorType
+    
+    This type is an extension to the ConnectorType type
+    (from the types schema) allowing a new kind of compound
+    type called a 'variant connector type.'  A variant
+    connector type may take on one or more other types,
+    depending on a set of system 'guards.'  This is
+    analogous to the 'union' type in the C or Pascal
+    programming languages.  
+    
+    Note: A connector type may be a basic type, a type
+    with substructure, or a variant type.  It may not
+    be a combination of two of these things.  For
+    instance, a connector type may not have both
+    substructure and a variantCollection.
+   -->
+  <xsd:complextype name="VariantConnectorType">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:ConnectorType">
+        <xsd:sequence>
+          <xsd:element name="variant" type="Variant" minoccurs="0" maxoccurs="unbounded">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+  
+</xsd:import></xsd:import></xsd:import></xsd:schema>
+</body></html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+	<provider id="org.tigris.subversion.subclipse.core.svnnature">
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4_updatesite,edu.uci.isr.archstudio4_updatesite"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4_feature,edu.uci.isr.archstudio4_feature"/>
+	</provider>
+</psf>

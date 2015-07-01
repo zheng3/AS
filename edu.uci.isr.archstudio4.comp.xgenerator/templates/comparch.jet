@@ -1,0 +1,145 @@
+package <c:get select="$archDefinedPackage" />;
+
+<java:importsLocation package="{$archDefinedPackage}"/>
+
+public class <c:get select="$archDefinedClass" /> extends <java:import>edu.uci.isr.myx.fw.AbstractMyxSimpleBrick</java:import><c:if test="cardinality($currComp/interface[direction='in']/type , '1M')"> implements </c:if><c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID" delimiter=','><java:import><c:get select="//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName" /></java:import></c:iterate>
+{
+<%--
+  This is to generate Myx-related variables.
+--%>
+<c:iterate select="$currComp/interface/type/@href" var="typeID">
+  <c:with select="//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName" var="intfName">
+    public static final <java:import>edu.uci.isr.myx.fw.IMyxName</java:import> msg_${className(string($intfName))} = <java:import>edu.uci.isr.myx.fw.MyxUtils</java:import>.createName("${$intfName}");
+  </c:with>
+</c:iterate>
+
+<%--
+  For each "out" interface, declare a variable "OUT_XXX" of that interface type.
+--%>
+<c:iterate select="$currComp/interface[direction='out']/type/@href" var="typeID">
+  <c:with select="//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName" var="intfName">
+    public <java:import>${$intfName}</java:import> OUT_${className(string($intfName))};
+  </c:with>
+</c:iterate>
+
+<%--
+  Implementation reference
+--%>
+	private <java:import>${$iPrimitivesPackage}.${$iPrimitives}</java:import> _imp;
+
+<%--
+  Constructor
+--%>
+    public ${$archDefinedClass} (){
+		_imp = getImplementation();
+		if (_imp != null){
+			_imp.setArch(this);
+		} else {
+			System.exit(1);
+		}
+	}
+    
+<%--
+  To obtain an instance of user-defined implementation.
+--%>     
+    protected ${$iPrimitives} getImplementation(){
+        try{
+			return new <java:import>${$userDefinedPackage}.${$userDefinedClass}</java:import>();    
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+
+<%--
+  This is to generate Myx-realted Methods: init(), begin(), ...
+--%>
+    public void init(){
+        _imp.init();
+    }
+    
+    public void begin(){
+<%--Initialize "out" interfaces--%>
+<c:iterate select="$currComp/interface[direction='out']" var="interface">
+  <c:with select="$interface/type/@href" var="typeID">
+    <c:with select="//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName" var="intfName">
+        OUT_${className(string($intfName))} = (${className(string($intfName))}) MyxUtils.getFirstRequiredServiceObject(this,msg_${className(string($intfName))});
+        if (OUT_${className(string($intfName))} == null){
+ 			System.err.println("Error: Interface ${$intfName} returned null");
+			return;       
+        }
+    </c:with>  
+  </c:with>  
+</c:iterate>
+        _imp.begin();
+    }
+    
+    public void end(){
+        _imp.end();
+    }
+    
+    public void destroy(){
+        _imp.destroy();
+    }
+    
+<%--Return "in" interface objects--%>    
+	public Object getServiceObject(<java:import>edu.uci.isr.myx.fw.IMyxName</java:import> arg0) {
+<c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID">
+  <c:with select="//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName" var="intfName">
+		if (arg0.equals(msg_${className(string($intfName))})){
+			return this;
+		}        
+  </c:with>
+</c:iterate>
+		return null;
+	}
+<%--
+  For each "in" interface, do the following.
+  Step 0: load the interface java file.
+  Step 1: import what is explictly imported in the interface file.
+  Step 2: implement the methods declared in the interface by forwarding whatever requests to the implementor.
+--%>
+<c:iterate select="$currComp/interface[direction='in']/type/@href" var="typeID">
+  <%--Step 0--%>
+  <mytag:loadClass project="{$org.eclipse.jet.resource.project.name}" fqn="{//interfaceType[@id=substring(string($typeID),2)]/implementation/mainClass/javaClassName}" var="root" />
+    <%--Step 1--%>
+    <c:with select="$root//imports[@nodeType='ImportDeclaration']">//To be imported: </c:with><c:iterate select="$root//imports[@nodeType='ImportDeclaration']" delimiter=','><java:import>${name[@nodeType='QualifiedName']}</java:import></c:iterate>
+    <%--Step 2--%>
+    <c:iterate select="$root//bodyDeclarations[@nodeType = 'MethodDeclaration']">
+    <c:choose>
+    <%--Methods that are defined by interaction diagrams--%>
+    <c:when test="javadoc/tags[1]//@tagName='@see'">
+    ${modifiers/@keyword} ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate> {
+    		<c:with select="javadoc/tags[1]//fragments[@nodeType='TextElement']/@text" var="interactionId">
+    		<c:iterate select="$xarch/interaction[@id=trimWhitespace($interactionId)]/message">
+    		<%--A little bit tricky below: just to add implementation decisions in--%>
+    		<c:choose>
+    		<c:when test="interfaceClassName">
+    		<c:choose>
+    		<c:when test="contains(string(description),'=')">
+		${substring-before(string(description),'=')} = OUT_${concat(className(string(interfaceClassName)), '.', trimWhitespace(substring-after(string(description),'=')))};
+    		</c:when>
+    		<c:otherwise>
+		OUT_${concat(className(string(interfaceClassName)), '.', trimWhitespace(string(description)))};
+    		</c:otherwise>
+    		</c:choose>
+    		</c:when>
+    		<c:otherwise>
+		${description};
+    		</c:otherwise>  		
+    		</c:choose>
+		<%--tricky ends here--%>
+    		</c:iterate>
+    		</c:with>
+    }    
+    </c:when>
+    <%--Other Methods--%>
+    <c:otherwise>
+    ${modifiers/@keyword} ${returnType2} ${name/@identifier} (<c:iterate select="parameters" delimiter=','>${.}</c:iterate>) <c:with select="thrownExceptions[@nodeType = 'SimpleName']">throws</c:with> <c:iterate select="thrownExceptions[@nodeType = 'SimpleName']" delimiter=','>${@identifier}</c:iterate> {
+		<c:if test="returnType2/@nodeType!='PrimitiveType' or returnType2/@primitiveTypeCode!='void'">return </c:if>_imp.${name/@identifier}(<c:iterate select="parameters" delimiter=','>${name/@identifier}</c:iterate>);
+    }    
+    </c:otherwise>    
+    </c:choose>
+    </c:iterate>
+</c:iterate> 
+}

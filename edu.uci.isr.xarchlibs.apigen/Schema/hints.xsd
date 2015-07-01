@@ -1,0 +1,69 @@
+
+<!-- saved from url=(0050)http://isr.uci.edu/projects/xarchuci/ext/hints.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/hints.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:archinstance="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/hints.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Rendering Hints XML Schema 1.0
+      
+      Depends on: {instance.xsd}
+      Change Log:
+         2002-01-10: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development.
+    </xsd:documentation>
+  </xsd:annotation>
+  
+  <!--
+    ELEMENT: renderingHints
+    
+    The renderingHints element (of type RenderingHints) is the root 
+    element that is the aegis over all rendering hints in the 
+    architecture. See the RenderingHints type for more detailed 
+    information.
+   -->
+  <xsd:element name="renderingHints" type="RenderingHints">
+
+  <!--
+    TYPE: VersionID
+
+    A VersionID is an opaque string containing a version
+    identifier for some component, connector, or interface
+    type.  You may extend this type to add your own
+    version ID schema for your project or organization.
+   -->
+  <xsd:simpletype name="VersionID">
+    <xsd:restriction base="xsd:string">
+    </xsd:restriction>
+  </xsd:simpletype>
+
+  <!--
+    TYPE: PropertyHint
+   -->
+  <xsd:complextype name="PropertyHint">
+    <xsd:attribute name="name" type="xsd:string">
+    <xsd:attribute name="value" type="xsd:string">
+  </xsd:attribute></xsd:attribute></xsd:complextype>
+  
+  <!--
+    TYPE: Hints
+   -->
+  <xsd:complextype name="Hints">
+    <xsd:sequence>
+      <xsd:element name="hintedThing" type="archinstance:XMLLink">
+      <xsd:element name="propertyHint" type="PropertyHint" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:element></xsd:sequence>
+  </xsd:complextype>
+
+  <!--
+    TYPE: RenderingHints
+   -->
+  <xsd:complextype name="RenderingHints">
+    <xsd:sequence>
+      <xsd:element name="hints" type="Hints" minoccurs="0" maxoccurs="unbounded">
+    </xsd:element></xsd:sequence>
+  </xsd:complextype>
+</xsd:element></xsd:import></xsd:schema>
+</body></html>

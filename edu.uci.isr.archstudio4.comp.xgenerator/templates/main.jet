@@ -1,0 +1,85 @@
+<%@taglib prefix="ws" id="org.eclipse.jet.workspaceTags" %>
+<%@taglib prefix="java" id="org.eclipse.jet.javaTags"%>
+<%@taglib prefix="mytag" id="edu.uci.isr.mytaglib.myTags"%>
+<%-- Main entry point for edu.uci.isr.archstudio4.comp.xgenerator --%>
+
+<%-- 
+  Let c:iterate tags set the XPath context object.
+  For 100% compatibility with JET 0.9.x or earlier, remove this statement
+ --%>
+<c:setVariable var="org.eclipse.jet.taglib.control.iterateSetsContext" select="true()"/>
+
+<%-- 
+TODO: traverse input model, performing calculations and storing 
+the results as model annotations via c:set tag 
+--%>
+
+<ws:project name="{$org.eclipse.jet.resource.project.name}">
+	<%--Calculate and store values needed by the templates
+		1. Reference to the component to be generated: currComp
+		2. Pakcage name can class name of generated files, including archDefinedFile and userDefinedFile.
+	--%>
+	<c:setVariable select="/xArch/archStructure/component[@id=$compid]" var="currComp" />
+	<c:setVariable select="/xArch" var="xarch" />
+	<c:setVariable select="removeWhitespace(packageName(string($archPrescribedClass)))" var="archDefinedPackage" />
+	<c:setVariable select="removeWhitespace(className(string($archPrescribedClass)))" var="archDefinedClass" />
+	<c:setVariable select="removeWhitespace(packageName(string($userDefinedClass)))" var="userDefinedPackage" />
+	<c:setVariable select="removeWhitespace(className(string($userDefinedClass)))" var="userDefinedClass" />
+	<c:setVariable select="concat('I', removeWhitespace(string($currComp/description)), 'Imp')" var="iPrimitives" />
+	<c:setVariable select="$archDefinedPackage" var="iPrimitivesPackage" />
+	<c:choose>
+		<c:when test="/xArch/statechart/linkedComp[substring(string(@href),2)=$compid]">
+			<%--A state chart is defined for the component--%>
+			<c:setVariable select="/xArch/statechart[substring(string(linkedComp/@href),2)=$compid]" var="scRef" />
+			<c:setVariable select="removeWhitespace($currComp/description)" var="compDesp" />
+			<ws:project name="{$prjName}">
+  			<ws:folder path="src">
+    			<java:class 
+				package="{$archDefinedPackage}" 
+      			name="{$archDefinedClass}" 
+      			template="templates/comparch_sc.jet"/>
+    			<java:class 
+				package="{$archDefinedPackage}" 
+      			name="{$compDesp}State"
+      			template="templates/abstract_st.jet"/>
+      		<c:iterate select="$scRef/state[@stateType='state']" var="currState">
+      		<c:setVariable select="removeWhitespace($currState/description)" var="stateDesp" />
+    			<java:class 
+				package="{$archDefinedPackage}" 
+      			name="{$compDesp}{$stateDesp}State"
+      			template="templates/concrete_st.jet"/>
+      		</c:iterate>	
+    			<java:class 
+      			package="{$userDefinedPackage}" 
+      			name="{$userDefinedClass}" 
+      			template="templates/compimp.jet"
+      			replace="false"/>
+    			<java:class 
+				package="{$iPrimitivesPackage}" 
+      			name="{$iPrimitives}" 
+      			template="templates/icomp.jet"/>
+      		</ws:folder>
+			</ws:project>
+		</c:when>
+		<c:otherwise>
+			<%--Invoke the templates to generate code--%>
+			<ws:project name="{$prjName}">
+  			<ws:folder path="src">
+    			<java:class 
+				package="{$archDefinedPackage}" 
+      			name="{$archDefinedClass}" 
+      			template="templates/comparch.jet"/>
+    			<java:class 
+      			package="{$userDefinedPackage}" 
+      			name="{$userDefinedClass}" 
+      			template="templates/compimp.jet"
+      			replace="false"/>
+    			<java:class 
+				package="{$iPrimitivesPackage}" 
+      			name="{$iPrimitives}" 
+      			template="templates/icomp.jet"/>
+      		</ws:folder>
+			</ws:project>
+		</c:otherwise>
+	</c:choose>
+</ws:project>

@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1422079897091
+Build-Jdk: 1.7.0_25
+Built-By: parrt
+Bundle-Description: The ANTLR 4 Runtime
+Bundle-DocURL: http://www.antlr.org
+Bundle-License: http://www.antlr.org/license.html
+Bundle-ManifestVersion: 2
+Bundle-Name: ANTLR 4 Runtime
+Bundle-SymbolicName: org.antlr.antlr4-runtime-osgi
+Bundle-Vendor: ANTLR
+Bundle-Version: 4.5
+Created-By: 1.7.0_25 (Oracle Corporation)
+Export-Package: org.abego.treelayout,org.abego.treelayout.internal.util,
+ org.abego.treelayout.internal.util.java.lang,org.abego.treelayout.inter
+ nal.util.java.lang.string,org.abego.treelayout.internal.util.java.util,
+ org.abego.treelayout.util;uses:="org.abego.treelayout",org.antlr.v4.run
+ time;uses:="javax.print,javax.swing,org.antlr.v4.runtime.atn,org.antlr.
+ v4.runtime.dfa,org.antlr.v4.runtime.misc,org.antlr.v4.runtime.tree,org.
+ antlr.v4.runtime.tree.pattern",org.antlr.v4.runtime.atn;uses:="org.antl
+ r.v4.runtime,org.antlr.v4.runtime.dfa,org.antlr.v4.runtime.misc",org.an
+ tlr.v4.runtime.dfa;uses:="org.antlr.v4.runtime,org.antlr.v4.runtime.atn
+ ",org.antlr.v4.runtime.misc;uses:="javax.annotation.processing,javax.la
+ ng.model,javax.lang.model.element,javax.print,javax.swing,org.antlr.v4.
+ runtime",org.antlr.v4.runtime.tree;uses:="org.antlr.v4.runtime,org.antl
+ r.v4.runtime.misc",org.antlr.v4.runtime.tree.gui;uses:="javax.print,jav
+ ax.swing,org.abego.treelayout,org.antlr.v4.runtime.tree",org.antlr.v4.r
+ untime.tree.pattern;uses:="org.antlr.v4.runtime,org.antlr.v4.runtime.mi
+ sc,org.antlr.v4.runtime.tree",org.antlr.v4.runtime.tree.xpath;uses:="or
+ g.antlr.v4.runtime,org.antlr.v4.runtime.atn,org.antlr.v4.runtime.dfa,or
+ g.antlr.v4.runtime.tree"
+Implementation-Title: ANTLR 4 Runtime
+Implementation-Vendor: ANTLR
+Implementation-Vendor-Id: org.antlr
+Implementation-Version: 4.5
+Import-Package: javax.annotation.processing;resolution:=optional,javax.i
+ mageio;resolution:=optional,javax.lang.model;resolution:=optional,javax
+ .lang.model.element;resolution:=optional,javax.lang.model.type;resoluti
+ on:=optional,javax.lang.model.util;resolution:=optional,javax.print;res
+ olution:=optional,javax.print.attribute;resolution:=optional,javax.swin
+ g;resolution:=optional,javax.swing.border;resolution:=optional,javax.sw
+ ing.event;resolution:=optional,javax.swing.filechooser;resolution:=opti
+ onal,javax.swing.tree;resolution:=optional,javax.tools;resolution:=opti
+ onal
+Originally-Created-By: http://www.bildtool.org
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Tool: Bnd-2.4.0.201411031536

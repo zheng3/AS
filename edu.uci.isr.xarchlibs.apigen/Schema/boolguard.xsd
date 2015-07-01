@@ -1,0 +1,300 @@
+
+<!-- saved from url=(0054)http://isr.uci.edu/projects/xarchuci/ext/boolguard.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/boolguard.xsd" xmlns:options="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/boolguard.xsd">
+
+<!-- Import types namespace -->
+<xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/options.xsd">
+  	    
+<xsd:annotation>
+	<xsd:documentation>
+      		xArch Boolean XML Schema 2.0
+
+      		Depends on: {options.xsd}
+
+      		Change Log:
+                  2002-01-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+                    Upgraded to 2001 XML Schema standard and validated
+                    with XML Spy 4.2.  Only changes were to the namespace
+                    declaration for 'xsd' in the header.
+    		  2001-09-27: Eric M. Dashofy [edashofy@ics.uci.edu]:
+      		    Cleanup and validation with XML Spy 3.5.
+      		  2001-09-25: Ping H. Chen [pingc@hotmail.com]:
+      		    Added GrEq, LsEq, NotEquals, parenthesis, inRange and inSet types.
+      		  2001-09-17: Ping H. Chen [pingc@hotmail.com]:
+      		    Modified the operators so that the left hand operand must be
+      		    a symbol and the right and operand can be a value or symbol.
+      		  2001-09-11: Ping H. Chen [pingc@hotmail.com]:
+      		    Initial development.  Based heavily on properties schema 
+                    developed by
+      		    Roberto Silveira Silva Filho [rsilvafi@ics.uci.edu]
+    	</xsd:documentation>
+</xsd:annotation>
+
+<!--
+  TYPE: Symbol
+
+  A symbol is just a a string representation of a variable
+-->
+<xsd:simpletype name="Symbol">
+	<xsd:restriction base="xsd:string">
+    	</xsd:restriction>
+</xsd:simpletype>
+
+<!--
+  TYPE: Value
+
+  A value is the different "values" that symbols can take.  For example, 
+  symbol can be "speed" and value can be "fast"
+-->
+<xsd:simpletype name="Value">
+  	<xsd:restriction base="xsd:string">
+    	</xsd:restriction>
+</xsd:simpletype>
+
+<!--
+  TYPE: BooleanGuard
+
+  A boolean guard is an extension of the options guard in the Options 
+  schema.  It includes all possible boolean expressions such as 
+  comparisons, logical operators, true, and false.  The boolean 
+  guard limits what a guard can be, namely, the guard now has to 
+  be a boolean expression.
+-->
+<xsd:complextype name="BooleanGuard">
+	<xsd:complexcontent mixed="true">
+      		<xsd:extension base="options:Guard">
+			<xsd:sequence>
+				<xsd:element name="booleanExp" type="BooleanExp">
+			</xsd:element></xsd:sequence>
+		</xsd:extension>
+    	</xsd:complexcontent>
+</xsd:complextype>
+
+<!--
+  TYPE: Bool
+
+  Represents a raw boolean value.  String values are
+  either 'true' or 'false'.
+ -->
+<xsd:complextype name="Bool">
+  <xsd:simplecontent>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="true">
+      <xsd:enumeration value="false">
+    </xsd:enumeration></xsd:enumeration></xsd:restriction>
+  </xsd:simplecontent>
+</xsd:complextype>
+
+<!--
+  TYPE: BooleanExp
+
+  The boolean expression can be any of the logical operators: and, or, not.
+  Or it can be a comparison: equal, greater than, less than, not equals,
+  greater-than-or-equal, or less-than-or-equal.
+  Or it can be true or false.
+  It also includes the set operation in set as well as in range.
+-->
+<xsd:complextype name="BooleanExp">
+	<xsd:choice>
+		<xsd:element name="and" type="And">
+		<xsd:element name="or" type="Or">
+		<xsd:element name="not" type="Not">
+		<xsd:element name="greaterThan" type="GreaterThan">
+		<xsd:element name="greaterThanOrEquals" type="GreaterThanOrEquals">
+		<xsd:element name="lessThan" type="LessThan">
+		<xsd:element name="lessThanOrEquals" type="LessThanOrEquals">
+		<xsd:element name="equals" type="Equals">
+		<xsd:element name="notEquals" type="NotEquals">
+		<xsd:element name="inSet" type="InSet">
+		<xsd:element name="inRange" type="InRange">
+		<xsd:element name="bool" type="Bool">
+		<xsd:element name="parenExp" type="Paren">
+	</xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:element></xsd:choice>
+</xsd:complextype>
+
+<!-- 
+  TYPE: Paren
+  
+  The paren type represents an parenthesized expression.  
+  It contains both the opening and closing parentheses as 
+  well as the expression within the parentheses.
+-->
+<xsd:complextype name="Paren">
+	<xsd:sequence>
+		<xsd:element name="booleanExp" type="BooleanExp">
+	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: GreaterThan
+
+  Represents the comparison, greater than.  It will take on 2 elements, the
+  first element (symbol) will be the left parameter while the second element 
+  (value) will be the right parameter.
+-->
+<xsd:complextype name="GreaterThan">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+		<xsd:choice>
+			<xsd:element name="symbol2" type="Symbol">
+	   		<xsd:element name="value" type="Value">
+	   	</xsd:element></xsd:element></xsd:choice>
+      	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: GreaterThanOrEquals
+
+  Represents the comparison, greater than or equals to.  It will take on 
+  2 elements, the first element (symbol) will be the left parameter while 
+  the second element (value) will be the right parameter.
+-->
+<xsd:complextype name="GreaterThanOrEquals">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+		<xsd:choice>
+			<xsd:element name="symbol2" type="Symbol">
+	   		<xsd:element name="value" type="Value">
+	   	</xsd:element></xsd:element></xsd:choice>
+      	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: LessThan
+
+  Represents the comparison, less than.  It will take on 2 elements, the 
+  first element (symbol) will be the left parameter while the second 
+  element (value) will be the right parameter.
+-->
+<xsd:complextype name="LessThan">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+	   	<xsd:choice>
+			<xsd:element name="symbol2" type="Symbol">
+	   		<xsd:element name="value" type="Value">
+	   	</xsd:element></xsd:element></xsd:choice>
+      	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: LessThanOrEquals
+
+  Represents the comparison, less than or equals to.  It will take on 
+  2 elements, the first element (symbol) will be the left parameter 
+  while the second element (value) will be the right parameter.
+-->
+<xsd:complextype name="LessThanOrEquals">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+	   	<xsd:choice>
+			<xsd:element name="symbol2" type="Symbol">
+	   		<xsd:element name="value" type="Value">
+	   	</xsd:element></xsd:element></xsd:choice>
+      	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: Equals
+
+  Represents an equality expression between a 2 elements.  The 
+  first element (symbol) will be the left parameter while the 
+  second element (symbol or value) will be the right parameter.
+-->
+<xsd:complextype name="Equals">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+	   	<xsd:choice>
+			<xsd:element name="symbol2" type="Symbol">
+	   		<xsd:element name="value" type="Value">
+	   	</xsd:element></xsd:element></xsd:choice>
+      	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: NotEquals
+
+  Represents an inequality expression between a 2 elements.  The 
+  first element (symbol) will be the left parameter while the 
+  second element (symbol or value) will be the right parameter.
+-->
+<xsd:complextype name="NotEquals">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+	   	<xsd:choice>
+			<xsd:element name="symbol2" type="Symbol">
+	   		<xsd:element name="value" type="Value">
+	   	</xsd:element></xsd:element></xsd:choice>
+      	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: And
+
+  Represents a logical AND expression with its both sides 
+  (subexpressions), using polish notation
+-->
+<xsd:complextype name="And">
+	<xsd:sequence>
+        	<xsd:element name="booleanExp1" type="BooleanExp">
+          	<xsd:element name="booleanExp2" type="BooleanExp">
+      	</xsd:element></xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: Or
+
+  Represents a logical OR expression with its both sides 
+  (subexpressions), using polish notation
+-->
+<xsd:complextype name="Or">
+	<xsd:sequence>
+        	<xsd:element name="booleanExp1" type="BooleanExp">
+          	<xsd:element name="booleanExp2" type="BooleanExp">
+	</xsd:element></xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: Not
+
+  Represents the unary logical NOT logical operation applied to a
+  logical (sub)expression
+-->
+<xsd:complextype name="Not">
+	<xsd:sequence>
+        	<xsd:element name="booleanExp" type="BooleanExp">
+     	</xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: InSet
+  
+  The in set type represents whether or not a particular symbol 
+  is in the set of values.  The set can either be 
+  empty or "infinite".
+-->
+<xsd:complextype name="InSet">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+		<xsd:element name="value" type="Value" minoccurs="0" maxoccurs="unbounded">
+	</xsd:element></xsd:element></xsd:sequence>
+</xsd:complextype>
+
+<!--
+  TYPE: InRange
+  
+  The in range type represents the operator to determine if a 
+  particular symbol is within 2 bounds inclusive.  The 2 bounds 
+  must be values.  There must be some ordered 
+  relation defined on the values.  The bounds do not have to 
+  be in particular order meaning the upper bound can come first 
+  or second.
+-->
+<xsd:complextype name="InRange">
+	<xsd:sequence>
+		<xsd:element name="symbol" type="Symbol">
+		<xsd:element name="value" type="Value" minoccurs="2" maxoccurs="2">
+	</xsd:element></xsd:element></xsd:sequence>
+</xsd:complextype>
+
+</xsd:import></xsd:schema>
+</body></html>

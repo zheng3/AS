@@ -1,0 +1,61 @@
+
+<!-- saved from url=(0059)http://isr.uci.edu/projects/xarchuci/ext/javainitparams.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/javainitparams.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:archinst="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" xmlns:archvariants="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" xmlns:javaimpl="http://www.ics.uci.edu/pub/arch/xArch/javaimplementation.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/javainitparams.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/variants.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/javaimplementation.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/javaimplementation.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Java Implementation Initialization Parameters XML Schema 1.0
+      
+      Depends on: {javaimplementation.xsd}
+         
+      Change Log:
+         2002-07-23: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed location of core (xArch) schema in the import
+           statement to a more stable URL.
+         2002-01-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Upgraded to 2001 XML Schema standard and validated
+           with XML Spy 4.2.  Only changes were to the namespace
+           declaration for 'xsd' in the header.
+         2001-11-02: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development and validated with XML Spy.
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: JavaClassFileParams
+    
+    The JavaClassFileParams type extends the JavaClassFile type
+    to add a set of initialization parameters, which are name-value
+    pairs.
+   -->
+  <xsd:complextype name="JavaClassFileParams">
+    <xsd:complexcontent>
+      <xsd:extension base="javaimpl:JavaClassFile">
+        <xsd:sequence>
+          <xsd:element name="initializationParameter" type="InitializationParameter" minoccurs="0" maxoccurs="unbounded">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+  
+  <!--
+    TYPE: InitializationParameter
+    
+    Simple name-value pair.
+   -->
+  <xsd:complextype name="InitializationParameter">
+    <xsd:attribute name="name" type="xsd:string">
+    <xsd:attribute name="value" type="xsd:string">
+  </xsd:attribute></xsd:attribute></xsd:complextype>
+  
+  
+</xsd:import></xsd:import></xsd:import></xsd:import></xsd:import></xsd:schema>
+</body></html>

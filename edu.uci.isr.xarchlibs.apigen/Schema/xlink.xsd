@@ -1,0 +1,7 @@
+
+<!-- saved from url=(0051)http://isr.uci.edu/projects/xarchuci/core/xlink.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/1999/xlink" xmlns:xlink="http://www.w3.org/1999/xlink" targetnamespace="http://www.w3.org/1999/xlink">
+  <xsd:attribute name="type" type="xsd:string">
+  <xsd:attribute name="href" type="xsd:anyURI">
+</xsd:attribute></xsd:attribute></xsd:schema>
+</body></html>

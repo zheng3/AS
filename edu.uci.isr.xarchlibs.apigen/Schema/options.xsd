@@ -1,0 +1,181 @@
+
+<!-- saved from url=(0052)http://isr.uci.edu/projects/xarchuci/ext/options.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body>
+
+<xsd:schema 
+	xmlns="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" 
+	targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/options.xsd" 
+	elementformdefault="qualified" 
+	attributeformdefault="qualified">
+
+  <!-- Import types namespace -->
+  <xsd:import 
+	namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" 
+	schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Options XML Schema 1.0
+      
+      Depends on: {types.xsd}
+      
+      Change Log:
+         2002-12-17: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Added OptionalSignatureInterfaceMapping type.
+         2002-05-18: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Added OptionalInterface and OptionalSignature types.
+         2002-01-28: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Upgraded to 2001 XML Schema standard and validated
+           with XML Spy 4.2.  Only changes were to the namespace
+           declaration for 'xsd' in the header.
+         2001-09-20: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Changed Guard from a simple type to an abstract type
+           to allow for proper extension thereof.
+         2001-04-12: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Cleaned up and validated with XML Spy 3.5.
+         2000-10-13: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development and validated with XSV
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: Guard
+
+    A Guard is some condition that, when satisfied, will 
+    signal some sort of change in the architecture 
+    (an optional component is included in the architecture 
+    or a variant adheres to the selected type).  The specific 
+    format of a guard is unspecified at this level.
+   -->
+  <xsd:complextype name="Guard" abstract="true">
+  
+  <!--
+    TYPE: Optional
+    
+    Type that specifies a tag containing conditions that can be
+    applied to a component, connector, or link if that component,
+    connector, or link is optional in the architecture.
+   -->
+  <xsd:complextype name="Optional">
+    <xsd:sequence>
+      <xsd:element name="guard" type="Guard">
+    </xsd:element></xsd:sequence>
+  </xsd:complextype>
+  
+  <!--
+    TYPE: OptionalComponent
+    
+    The OptionalComponent type extends the Component type
+    to add the ability to make a component optional
+    based on a guard.  This is a key feature for 
+    configuration management.  Specification of
+    optionality is optional.  
+   -->
+  <xsd:complextype name="OptionalComponent">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:Component">
+        <xsd:sequence>
+          <xsd:element name="optional" type="Optional" minoccurs="0" maxoccurs="1">
+        </xsd:element>
+		</xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: OptionalConnector
+    
+    The OptionalConnector type extends the Connector type
+    to add the ability to make a connector optional
+    based on a guard.  This is a key feature for 
+    configuration management.  Specification of
+    optionality is optional.  
+   -->
+  <xsd:complextype name="OptionalConnector">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:Connector">
+        <xsd:sequence>
+          <xsd:element name="optional" type="Optional" minoccurs="0" maxoccurs="1">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+  
+  <!--
+    TYPE: OptionalLink
+    
+    The OptionalLink type extends the Link type
+    to add the ability to make a link optional.
+    This is a key feature for configuration management.  
+    Specification of optionality is optional.
+   -->
+  <xsd:complextype name="OptionalLink">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:Link">
+        <xsd:sequence>
+          <xsd:element name="optional" type="Optional" minoccurs="0" maxoccurs="1">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: OptionalInterface
+    
+    The OptionalInterface type extends the Interface type
+    to add the ability to make an interface optional.
+    This is a key feature for configuration management.  
+    Specification of optionality is optional.
+   -->
+  <xsd:complextype name="OptionalInterface">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:Interface">
+        <xsd:sequence>
+          <xsd:element name="optional" type="Optional" minoccurs="0" maxoccurs="1">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: OptionalSignature
+    
+    The OptionalSignature type extends the Signature type
+    to add the ability to make a signature optional.
+    This is a key feature for configuration management.  
+    Specification of optionality is optional.
+   -->
+  <xsd:complextype name="OptionalSignature">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:Signature">
+        <xsd:sequence>
+          <xsd:element name="optional" type="Optional" minoccurs="0" maxoccurs="1">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: OptionalSignatureInterfaceMapping
+    
+    The OptionalSignatureInterfaceMapping type extends 
+    the SignatureInterfaceMapping type to add the ability 
+    to make a signature-interface mapping optional.
+    This is a key feature for configuration management.  
+    Specification of optionality is optional.
+   -->
+  <xsd:complextype name="OptionalSignatureInterfaceMapping">
+    <xsd:complexcontent>
+      <xsd:extension base="archtypes:SignatureInterfaceMapping">
+        <xsd:sequence>
+          <xsd:element name="optional" type="Optional" minoccurs="0" maxoccurs="1">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+</xsd:complextype></xsd:import></xsd:schema>
+</body></html>

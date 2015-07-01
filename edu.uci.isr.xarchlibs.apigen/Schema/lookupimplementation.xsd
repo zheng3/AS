@@ -1,0 +1,59 @@
+
+<!-- saved from url=(0065)http://isr.uci.edu/projects/xarchuci/ext/lookupimplementation.xsd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><xsd:schema xmlns="http://www.ics.uci.edu/pub/arch/xArch/lookupimplementation.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:archinst="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" xmlns:archtypes="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" xmlns:archvariants="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" xmlns:archimpl="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" targetnamespace="http://www.ics.uci.edu/pub/arch/xArch/lookupimplementation.xsd" elementformdefault="qualified" attributeformdefault="qualified">
+
+  <!-- Import namespaces used -->
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/instance.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/core/instance.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/types.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/types.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/variants.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/variants.xsd">
+  <xsd:import namespace="http://www.ics.uci.edu/pub/arch/xArch/implementation.xsd" schemalocation="http://www.isr.uci.edu/projects/xarchuci/ext/implementation.xsd">
+
+  <xsd:annotation>
+    <xsd:documentation>
+      xArch Java Implementation XML Schema 1.0
+      
+      Depends on: {types.xsd, variants.xsd, implementation.xsd}
+         Note: The actual dependency set of this extension is
+         just types and implementation, but because of XML Schema 
+         1.0's single inheritance model, we also extend variants
+         so that a component/connector type may have both 
+         variants and an implementation.
+         
+      Change Log:
+         2005-12-05: Eric M. Dashofy [edashofy@ics.uci.edu]:
+           Initial Development and validated with XSV
+
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!--
+    TYPE: LookupImplementation
+
+    The LookupImplementation type contains a name that can
+    be used to look up the implementation from some sort of
+    registry, nameserver, or other source where implementations
+    are found by name.
+   -->
+  <xsd:complextype name="LookupImplementation">
+    <xsd:complexcontent>
+      <xsd:extension base="archimpl:Implementation">
+        <xsd:sequence>
+          <xsd:element name="name" type="LookupName">
+        </xsd:element></xsd:sequence>
+      </xsd:extension>
+    </xsd:complexcontent>
+  </xsd:complextype>
+
+  <!--
+    TYPE: LookupName
+
+    A LookupName is the name of an implementation.
+   -->
+  <xsd:complextype name="LookupName">
+    <xsd:simplecontent>
+      <xsd:extension base="xsd:string">
+    </xsd:extension></xsd:simplecontent>
+  </xsd:complextype>
+  
+</xsd:import></xsd:import></xsd:import></xsd:import></xsd:schema>
+</body></html>

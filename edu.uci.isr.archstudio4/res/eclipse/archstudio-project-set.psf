@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+	<provider id="org.tigris.subversion.subclipse.core.svnnature">
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4,edu.uci.isr.archstudio4"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4.comp.booleaneval,edu.uci.isr.archstudio4.comp.booleaneval"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4.comp.relatedelements,edu.uci.isr.archstudio4.comp.relatedelements"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4.comp.selector,edu.uci.isr.archstudio4.comp.selector"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4.comp.xarchadt,edu.uci.isr.archstudio4.comp.xarchadt"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/archstudio4/trunk/edu.uci.isr.archstudio4.comp.xarchcs,edu.uci.isr.archstudio4.comp.xarchcs"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/bna4/trunk/edu.uci.isr.bna4,edu.uci.isr.bna4"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/myxfw/trunk/edu.uci.isr.myx.fw,edu.uci.isr.myx.fw"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/utils/trunk/edu.uci.isr.swtutils,edu.uci.isr.swtutils"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/utils/trunk/edu.uci.isr.sysutils,edu.uci.isr.sysutils"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/utils/trunk/edu.uci.isr.xadlutils,edu.uci.isr.xadlutils"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/xarchlibs4/trunk/edu.uci.isr.xarchflat,edu.uci.isr.xarchflat"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/xarchlibs4/trunk/edu.uci.isr.xarchflat.apigen,edu.uci.isr.xarchflat.apigen"/>
+		<project reference="0.9.3,http://tps.ics.uci.edu/svn/projects/xarchlibs4/trunk/edu.uci.isr.xarchlibs.apigen,edu.uci.isr.xarchlibs.apigen"/>
+	</provider>
+</psf>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="edu.umkc.archstudio4.markers.feature_marker"
+         name="Feature marker"
+         point="org.eclipse.core.resources.markers">
+         <super type="org.eclipse.core.resources.textmarker"/>
+         <super type="org.eclipse.core.resources.marker"/>
+         <persistent value="true"/>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_0"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_0"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_1"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_1"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_2"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_2"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_3"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_3"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_4"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_4"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_5"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_5"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_6"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_6"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+   
+   <extension
+         id="edu.umkc.archstudio4.featureannotationspecification"
+         name="featureannotationspecification"
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="edu.umkc.archstudio4.markers.feature_annotation_7"
+            label="Feature Annotation"
+            icon="icons/marker.png"
+            includeOnPreferencePage="false"
+            colorPreferenceKey="aColor_7"
+            colorPreferenceValue="255,255,0"
+            highlightPreferenceKey="aHighlight"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="aRuler"
+            overviewRulerPreferenceValue="true"
+            textPreferenceKey="aText"
+            textPreferenceValue="true"
+            verticalRulerPreferenceKey="aVertical"
+            verticalRulerPreferenceValue="true">
+      </specification>
+   </extension>
+
+</plugin>

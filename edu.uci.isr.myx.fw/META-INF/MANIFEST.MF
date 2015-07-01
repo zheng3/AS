@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Myx Framework Plug-in
+Bundle-SymbolicName: edu.uci.isr.myx.fw
+Bundle-Version: 4.1.50.qualifier
+Bundle-Vendor: Institute for Software Research, UC Irvine
+Bundle-Localization: plugin
+Export-Package: 
+ edu.uci.isr.ljm,
+ edu.uci.isr.myx.comp,
+ edu.uci.isr.myx.conn,
+ edu.uci.isr.myx.demo.basic,
+ edu.uci.isr.myx.fw
+Bundle-ClassPath: .

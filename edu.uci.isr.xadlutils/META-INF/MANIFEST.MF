@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ISR xADL Utilities Plug-in
+Bundle-SymbolicName: edu.uci.isr.xadlutils
+Bundle-Version: 4.1.50.qualifier
+Bundle-Vendor: Institute for Software Research, UC Irvine
+Bundle-Localization: plugin
+Require-Bundle: edu.uci.isr.sysutils,
+ edu.uci.isr.xarchflat
+Export-Package: edu.uci.isr.xadlutils

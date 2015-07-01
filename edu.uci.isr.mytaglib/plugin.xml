@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.jet.tagLibraries">
+      <tagLibrary
+            id="myTags"
+            name="myTags">
+         <emptyTag
+               class="edu.uci.isr.mytaglib.LoadClassTag"
+               name="loadClass"
+               whenContainingLineIsEmpty="preserve">
+            <attribute
+                  name="project"
+                  type="string"
+                  use="required">
+            </attribute>
+            <attribute
+                  name="fqn"
+                  type="string"
+                  use="required">
+            </attribute>
+            <attribute
+                  name="var"
+                  type="string"
+                  use="required">
+            </attribute>
+         </emptyTag>
+      </tagLibrary>
+   </extension>
+
+</plugin>
